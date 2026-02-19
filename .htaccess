@@ -7,6 +7,9 @@
     RewriteEngine On
     RewriteBase /
     
+    # Skip index.php - don't serve it directly
+    RewriteRule ^index\.php$ pages/index.html [END]
+    
     # Exit rewriting if file or directory exists
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
