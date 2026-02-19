@@ -111,7 +111,7 @@
                             <div class="flex items-center gap-3"><i class="fas fa-exclamation-circle text-lg"></i><span><strong>Error!</strong> <span id="errorText"></span></span></div>
                         </div>
 
-                        <form id="contactForm" method="POST" action="../backend/contact_process.php" class="space-y-6">
+                        <form id="contactForm" method="POST" action="/STP/backend/contact_process.php" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">Full Name <span class="text-red-500">*</span></label>
@@ -198,7 +198,7 @@
 
             if(valid){
                 var data = new FormData(form);
-                fetch('../backend/contact_process.php', { method:'POST', body: data })
+                fetch('/STP/backend/contact_process.php', { method:'POST', body: data })
                 .then(function(r){ return r.json(); })
                 .then(function(j){
                     if(j.success){ form.reset(); success.classList.remove('hidden'); setTimeout(function(){ success.classList.add('hidden'); }, 5000); }
