@@ -1,10 +1,11 @@
 /**
  * Path Configuration for Frontend
  * Detects the correct base path for API calls and asset loading
+ * Works with both /STP/ subdirectory and domain root deployment
  */
 
 (function() {
-    // Detect if we're in /STP/ subdirectory
+    // Detect if we're in /STP/ subdirectory or at domain root
     const currentPath = window.location.pathname;
     const basePath = currentPath.includes('/STP/') ? '/STP' : '';
     

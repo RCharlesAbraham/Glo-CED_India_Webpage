@@ -1,38 +1,33 @@
 # STP Website - Apache Configuration (Apache 2.4 compatible)
-# Works with /STP/ subdirectory or at domain root
+# Configured for: glo.tekquora.com (domain root)
+# RewriteBase: /
+# Routes all requests to pages/ folder with proper security
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /
     
-    # Set RewriteBase (adjust if deploying to different location)
-    RewriteBase /STP/
-    
-    # Allow access to actual files and directories
+    # Exit rewriting if file or directory exists
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
+    RewriteRule ^ - [END]
     
-    # Allow API endpoints to pass through
-    RewriteRule ^backend/contact_process\.php$ backend/contact_process.php [L]
+    # Block direct access to sensitive directories
+    RewriteRule ^config/ - [F,END]
     
-    # Allow admin area
-    RewriteRule ^admin/ - [L]
+    # Allow these directories to pass through
+    RewriteRule ^(assets|backend|admin|Doc|tools)/ - [END]
     
-    # Block direct access to config files (while allowing PHP execution)
-    RewriteRule ^config/ - [F,L]
+    # Root path (/) serves pages/index.html
+    RewriteRule ^$ pages/index.html [END]
     
-    # Redirect root requests to pages/index.html
-    RewriteRule ^$ pages/index.html [L]
+    # Requested .html files map to pages/ folder
+    # e.g., /programs.html -> pages/programs.html
+    RewriteRule ^([a-zA-Z0-9_-]+)\.html$ pages/$1.html [END]
     
-    # Serve pages from /pages/ for requests like /page.html
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^([A-Za-z0-9_-]+)\.html$ pages/$1.html [L]
-    
-    # Clean URLs - allow /about, /services, etc. to map to /pages/about.html
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^([A-Za-z0-9_-]+)/?$ pages/$1.html [L]
+    # Clean URLs: /programs -> pages/programs.html
+    # e.g., /programs -> pages/programs.html
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ pages/$1.html [END]
 </IfModule>
 
 # Security Headers
