@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details | Glo-CED India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .nav-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #4b5563; }
+        .prose h3 { font-size: 1.25rem; font-weight: 700; color: #111827; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .prose blockquote { border-left: 4px solid #2563eb; background: #eff6ff; padding: 1.25rem 1.5rem; border-radius: 0 0.75rem 0.75rem 0; margin: 1.5rem 0; font-style: italic; color: #1e40af; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Top Bar -->
+    <div class="bg-blue-900 text-white text-sm hidden lg:block">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <span><i class="fas fa-phone-alt mr-2"></i>+91 98765 43210</span>
+                <span><i class="fas fa-envelope mr-2"></i>info@glocedindia.org</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-white sticky top-0 z-50 transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="assets/img/logo/logo.png" alt="Glo-CED India" class="w-10 h-10 object-contain">
+                    <span class="text-xl font-bold text-blue-900">Glo-CED India</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Home</a>
+                    <a href="programs.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Programs</a>
+                    
+                    <a href="blog.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Blog</a>
+                    <a href="gallery.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Gallery</a>
+                    <a href="contact_new.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Contact</a>
+                </div>
+                <div class="hidden lg:block">
+                    <a href="contact_new.html" class="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition shadow-md hover:shadow-lg">
+                        Donate Now
+                    </a>
+                </div>
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-blue-600 font-medium">Home</a>
+                <a href="programs.html" class="block py-2 text-gray-600 hover:text-blue-600 font-medium">Programs</a>
+                
+                <a href="blog.html" class="block py-2 text-blue-600 font-semibold">Blog</a>
+                <a href="gallery.html" class="block py-2 text-gray-600 hover:text-blue-600 font-medium">Gallery</a>
+                <a href="contact_new.html" class="block py-2 text-gray-600 hover:text-blue-600 font-medium">Contact</a>
+                <a href="contact_new.html" class="block mt-3 text-center px-6 py-2.5 bg-green-600 text-white font-semibold rounded-full">Donate Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-blue-900 py-16 sm:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-40 h-40 border-2 border-white rounded-full"></div>
+            <div class="absolute bottom-10 right-10 w-60 h-60 border-2 border-white rounded-full"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-3xl sm:text-5xl font-bold text-white mb-4">Blog Details</h1>
+            <div class="flex items-center justify-center gap-2 mt-4 text-sm">
+                <a href="index.html" class="text-blue-300 hover:text-white transition">Home</a>
+                <i class="fas fa-chevron-right text-blue-400 text-xs"></i>
+                <a href="blog.html" class="text-blue-300 hover:text-white transition">Blog</a>
+                <i class="fas fa-chevron-right text-blue-400 text-xs"></i>
+                <span class="text-white">Details</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Detail Content -->
+    <section class="py-16 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-10">
+
+                <!-- Main Content -->
+                <article class="lg:w-2/3">
+                    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                        <!-- Feature Image -->
+                        <div class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                            <i class="fas fa-image text-white/30 text-8xl"></i>
+                        </div>
+
+                        <div class="p-6 sm:p-10">
+                            <!-- Meta -->
+                            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
+                                <span class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">
+                                    <i class="fas fa-folder text-xs"></i> Community
+                                </span>
+                                <span><i class="fas fa-calendar mr-1"></i> January 15, 2025</span>
+                                <span><i class="fas fa-user mr-1"></i> Admin</span>
+                                <span><i class="fas fa-comments mr-1"></i> 3 Comments</span>
+                            </div>
+
+                            <!-- Title -->
+                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 leading-tight">Building Character Through Community Engagement Programs</h1>
+
+                            <!-- Prose Content -->
+                            <div class="prose max-w-none">
+                                <p>Our community engagement programs have been instrumental in shaping the character of young leaders across India. Through hands-on experience and mentorship, participants develop the ethical foundation needed for responsible leadership in today's complex world.</p>
+
+                                <p>The foundation of our approach lies in the belief that character is not merely taught, but cultivated through meaningful experiences. When young people engage directly with their communities, they develop empathy, resilience, and a sense of responsibility that no classroom lecture can provide.</p>
+
+                                <h3>The Power of Direct Engagement</h3>
+
+                                <p>Our programs connect participants with communities facing real challenges. Through structured service projects, leadership exercises, and reflective practices, they learn to navigate complex situations while maintaining their ethical compass.</p>
+
+                                <blockquote>
+                                    Character building is not a destination but a continuous journey. Every interaction with the community teaches us something new about ourselves and our capacity to make a difference.
+                                </blockquote>
+
+                                <p>Over the past year, we have witnessed remarkable transformations. Participants who started as shy observers have grown into confident community leaders, organizing initiatives and inspiring others to join the cause of social transformation.</p>
+
+                                <h3>Impact and Outcomes</h3>
+
+                                <p>The results speak for themselves. Over 500 young people have participated in our programs this year alone, with 85% reporting significant personal growth in areas of empathy, leadership, and social awareness. Many have gone on to start their own community initiatives, creating a ripple effect of positive change.</p>
+
+                                <p>As we look toward the future, we remain committed to expanding our reach and deepening our impact. With the support of our donors and volunteers, we are confident that we can build a generation of ethical leaders who will transform India from the ground up.</p>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="mt-8 pt-6 border-t border-gray-100">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="text-sm font-semibold text-gray-700">Tags:</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full hover:bg-blue-100 hover:text-blue-600 transition cursor-pointer">Character Building</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full hover:bg-blue-100 hover:text-blue-600 transition cursor-pointer">Community</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full hover:bg-blue-100 hover:text-blue-600 transition cursor-pointer">Leadership</span>
+                                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full hover:bg-blue-100 hover:text-blue-600 transition cursor-pointer">Youth</span>
+                                </div>
+                            </div>
+
+                            <!-- Share -->
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm font-semibold text-gray-700">Share:</span>
+                                    <a href="#" class="w-9 h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a>
+                                    <a href="#" class="w-9 h-9 bg-sky-500 hover:bg-sky-600 text-white rounded-lg flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a>
+                                    <a href="#" class="w-9 h-9 bg-blue-700 hover:bg-blue-800 text-white rounded-lg flex items-center justify-center transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+                                    <a href="#" class="w-9 h-9 bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center justify-center transition"><i class="fab fa-whatsapp text-sm"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Author Box -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 mt-8">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-2xl font-bold">A</span>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <h3 class="text-lg font-bold text-gray-900">Admin</h3>
+                                <p class="text-sm text-blue-600 mb-2">Content Writer</p>
+                                <p class="text-gray-600 text-sm leading-relaxed">Passionate about sharing stories of social impact and community transformation. Dedicated to raising awareness about character building and ethical leadership.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post Navigation -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                        <a href="#" class="group bg-white rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition">
+                            <div class="w-10 h-10 bg-gray-100 group-hover:bg-blue-100 rounded-xl flex items-center justify-center transition">
+                                <i class="fas fa-arrow-left text-gray-400 group-hover:text-blue-600 transition"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase font-medium">Previous</p>
+                                <p class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition">Space The Final Frontier</p>
+                            </div>
+                        </a>
+                        <a href="#" class="group bg-white rounded-2xl shadow-sm p-5 flex items-center justify-end gap-4 text-right hover:shadow-md transition">
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase font-medium">Next</p>
+                                <p class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition">Telescopes 101</p>
+                            </div>
+                            <div class="w-10 h-10 bg-gray-100 group-hover:bg-blue-100 rounded-xl flex items-center justify-center transition">
+                                <i class="fas fa-arrow-right text-gray-400 group-hover:text-blue-600 transition"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 mt-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">3 Comments</h3>
+                        <div class="space-y-6">
+                            <!-- Comment 1 -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">E</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="font-semibold text-gray-900">Emily Johnson</h4>
+                                        <span class="text-xs text-gray-400">January 16, 2025</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed mb-2">This is such an inspiring article! The work Glo-CED is doing with young leaders is truly remarkable. I would love to know how I can volunteer.</p>
+                                    <button class="text-sm text-blue-600 hover:text-blue-700 font-medium transition">Reply</button>
+                                </div>
+                            </div>
+
+                            <!-- Comment 2 (reply) -->
+                            <div class="flex gap-4 ml-12">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">A</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="font-semibold text-gray-900">Admin</h4>
+                                        <span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full font-medium">Author</span>
+                                        <span class="text-xs text-gray-400">January 16, 2025</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed mb-2">Thank you, Emily! We always welcome volunteers. Please visit our contact page to get in touch and we will connect you with opportunities in your area.</p>
+                                    <button class="text-sm text-blue-600 hover:text-blue-700 font-medium transition">Reply</button>
+                                </div>
+                            </div>
+
+                            <!-- Comment 3 -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold">R</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h4 class="font-semibold text-gray-900">Rajesh Kumar</h4>
+                                        <span class="text-xs text-gray-400">January 17, 2025</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed mb-2">As a former participant in one of Glo-CED's programs, I can personally attest to the transformative impact these initiatives have. They changed my perspective on leadership completely.</p>
+                                    <button class="text-sm text-blue-600 hover:text-blue-700 font-medium transition">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment Form -->
+                        <div class="mt-10 pt-8 border-t border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-6">Leave a Comment</h3>
+                            <form class="space-y-5">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <input type="text" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                                    <input type="email" placeholder="Your Email" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                                </div>
+                                <textarea rows="5" placeholder="Your comment..." class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition resize-none"></textarea>
+                                <button type="submit" class="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
+                                    <i class="fas fa-paper-plane"></i> Post Comment
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="lg:w-1/3 space-y-8">
+                    <!-- Search -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Search</h3>
+                        <div class="relative">
+                            <input type="text" placeholder="Search articles..."
+                                class="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                            <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Categories</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="flex items-center justify-between text-gray-600 hover:text-blue-600 transition">
+                                <span>Community</span><span class="bg-blue-100 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full">8</span>
+                            </a></li>
+                            <li><a href="#" class="flex items-center justify-between text-gray-600 hover:text-blue-600 transition">
+                                <span>Leadership</span><span class="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">12</span>
+                            </a></li>
+                            <li><a href="#" class="flex items-center justify-between text-gray-600 hover:text-blue-600 transition">
+                                <span>Education</span><span class="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">6</span>
+                            </a></li>
+                            <li><a href="#" class="flex items-center justify-between text-gray-600 hover:text-blue-600 transition">
+                                <span>Social Impact</span><span class="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">10</span>
+                            </a></li>
+                            <li><a href="#" class="flex items-center justify-between text-gray-600 hover:text-blue-600 transition">
+                                <span>Events</span><span class="bg-gray-100 text-gray-500 text-xs font-medium px-2.5 py-1 rounded-full">5</span>
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
+                        <div class="space-y-4">
+                            <a href="blog_details.html" class="flex gap-4 group">
+                                <div class="w-20 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex-shrink-0 flex items-center justify-center">
+                                    <i class="fas fa-image text-white/40"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition">Ethical Leadership Workshop Empowers 200+ Youth</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Jan 08, 2025</p>
+                                </div>
+                            </a>
+                            <a href="blog_details.html" class="flex gap-4 group">
+                                <div class="w-20 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex-shrink-0 flex items-center justify-center">
+                                    <i class="fas fa-image text-white/40"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition">Annual Report: Transforming Lives Through Education</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Dec 28, 2024</p>
+                                </div>
+                            </a>
+                            <a href="blog_details.html" class="flex gap-4 group">
+                                <div class="w-20 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex-shrink-0 flex items-center justify-center">
+                                    <i class="fas fa-image text-white/40"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition">Social Transformation: Stories From the Field</h4>
+                                    <p class="text-xs text-gray-400 mt-1">Dec 20, 2024</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter CTA -->
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-md p-6 text-white">
+                        <h3 class="text-lg font-bold mb-2">Stay Updated</h3>
+                        <p class="text-blue-200 text-sm mb-4">Subscribe to our newsletter for the latest stories and updates.</p>
+                        <div class="space-y-3">
+                            <input type="email" placeholder="Your email address"
+                                class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/40">
+                            <button class="w-full px-4 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition">
+                                Subscribe <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-hands-helping text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Glo-CED India</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Committed to character building, ethical leadership, and social transformation across India.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-pink-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt mt-1 text-blue-400"></i><span>Chennai, Tamil Nadu, India</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone-alt mt-1 text-blue-400"></i><span>+91 98765 43210</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope mt-1 text-blue-400"></i><span>info@glocedindia.org</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+
+                        <li><a href="programs.html" class="hover:text-white transition">Programs</a></li>
+                        <li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li>
+                        <li><a href="contact_new.html" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Newsletter</h4>
+                    <p class="text-sm text-gray-400 mb-4">Subscribe for updates on our programs and impact.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email address" class="flex-1 px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-l-lg text-sm focus:outline-none focus:border-blue-500">
+                        <button class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-r-lg transition"><i class="fas fa-paper-plane text-sm"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2025 Glo-CED India. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed with <i class="fas fa-heart text-red-500"></i> for social impact</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="fixed bottom-6 right-6 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 50) { navbar.classList.add('nav-scrolled'); } else { navbar.classList.remove('nav-scrolled'); }
+            if (window.scrollY > 400) { backToTop.classList.remove('opacity-0','invisible'); backToTop.classList.add('opacity-100','visible'); }
+            else { backToTop.classList.add('opacity-0','invisible'); backToTop.classList.remove('opacity-100','visible'); }
+        });
+    </script>
+</body>
+</html>

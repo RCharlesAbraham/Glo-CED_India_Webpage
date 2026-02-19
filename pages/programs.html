@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Do | Glo-CED India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      html { scroll-behavior: smooth; }
+      .nav-scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+      .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+      .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased">
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300">
+        <div class="hidden lg:block bg-blue-900 text-white text-sm">
+            <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+                <div class="flex items-center gap-6"><span><i class="fas fa-phone-alt mr-2"></i>+91 (0) 123 456 7890</span><span><i class="fas fa-envelope mr-2"></i>info@gloced.org</span></div>
+                <div class="flex items-center gap-4"><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-facebook-f"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-twitter"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-linkedin-in"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-instagram"></i></a></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="assets/img/logo/logo.png" alt="Glo-CED India" class="w-10 h-10 object-contain">
+                <span class="text-xl font-bold text-blue-900">Glo-CED <span class="text-green-600">India</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Home</a>
+                <a href="programs.html" class="text-blue-900 font-semibold border-b-2 border-blue-600 pb-1">What We Do</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Gallery</a>
+                <a href="contact_new.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Contact</a>
+            </div>
+            <div class="hidden lg:flex"><a href="contact_new.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold transition shadow-md">Donate</a></div>
+            <button id="mobile-menu-btn" class="lg:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t px-6 pb-6"><div class="flex flex-col gap-4 pt-4"><a href="index.html" class="text-gray-600 py-2">Home</a><a href="programs.html" class="text-blue-700 font-semibold py-2">What We Do</a><a href="gallery.html" class="text-gray-600 py-2">Gallery</a><a href="contact_new.html" class="text-gray-600 py-2">Contact</a><a href="contact_new.html" class="bg-green-600 text-white text-center py-3 rounded-lg font-semibold mt-2">Donate</a></div></div>
+    </nav>
+
+    <main>
+    <!-- ==================== PAGE HEADER ==================== -->
+    <section class="bg-blue-900 pt-32 pb-20 text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <span class="inline-block bg-white/20 text-sm font-semibold px-4 py-2 rounded-full mb-4"><i class="fas fa-hands-helping mr-2"></i>Glo-CED Initiative</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Core Program Areas Driving Social Transformation</h1>
+            <p class="text-blue-200 text-lg max-w-2xl mx-auto">Explore our programs and services aimed at making a real difference in communities across India.</p>
+        </div>
+    </section>
+
+    <!-- ==================== PROGRAM AREAS ==================== -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Program Areas</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Four Pillars of Our Work</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-blue-600 text-center">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5"><i class="fas fa-book"></i></div>
+                    <h4 class="font-bold text-gray-900 mb-3">Education & Capacity Building</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Comprehensive inclusive education programs and ICT-enabled skill development for grassroots community empowerment.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-green-600 text-center">
+                    <div class="w-14 h-14 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5"><i class="fas fa-chart-line"></i></div>
+                    <h4 class="font-bold text-gray-900 mb-3">Research & Policy Bridge</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Evidence-based knowledge generation with strategic links between research and policy for actionable solutions.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-amber-500 text-center">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5"><i class="fas fa-hands-helping"></i></div>
+                    <h4 class="font-bold text-gray-900 mb-3">Health & Livelihood</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Health program implementation and livelihood enhancement initiatives for community resilience building.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover border-t-4 border-purple-600 text-center">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-5"><i class="fas fa-leaf"></i></div>
+                    <h4 class="font-bold text-gray-900 mb-3">Sustainable Development</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Inclusive development pathways promoting environmental responsibility and long-term social progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Our Programs</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Making a Real Difference</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-graduation-cap"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Education Programs</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Providing quality education and scholarships to underprivileged children, ensuring every child has access to learning opportunities.</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-heartbeat"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Healthcare Initiatives</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Delivering accessible healthcare services and medical camps to remote communities, promoting health awareness and preventive care.</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-cogs"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Skill Development</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Training programs in vocational skills and employment opportunities, empowering individuals to become self-sufficient.</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-cyan-100 text-cyan-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-tint"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Water & Sanitation</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Building water wells and sanitation facilities in villages, ensuring clean drinking water and improved hygiene standards.</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Community Support</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Providing food aid, shelter assistance, and rehabilitation programs for vulnerable families, helping them rebuild with dignity.</p>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 card-hover text-center">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fas fa-seedling"></i></div>
+                    <h4 class="font-bold text-gray-900 text-lg mb-3">Environmental Care</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed">Environmental conservation and sustainability initiatives, promoting tree plantation drives and clean community programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMPACT ==================== -->
+    <section class="py-20 bg-blue-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <span class="text-green-400 font-semibold text-sm uppercase tracking-wider">Our Impact</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-6">Transforming Lives Through Dedicated Service</h2>
+                    <p class="text-blue-200 leading-relaxed mb-4">Our programs reach thousands of beneficiaries across multiple regions, creating sustainable development and positive social change.</p>
+                    <p class="text-blue-200 leading-relaxed mb-8">Every donation and volunteer effort contributes directly to our mission of building a more just and equitable society.</p>
+                    <a href="contact_new.html" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition shadow-md">Get Involved <i class="fas fa-arrow-right text-sm"></i></a>
+                </div>
+                <div class="lg:w-1/2 grid grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center">
+                        <div class="text-4xl font-extrabold text-green-400 mb-2">50,000+</div>
+                        <p class="text-blue-200 text-sm">Lives Impacted</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center">
+                        <div class="text-4xl font-extrabold text-green-400 mb-2">1,000+</div>
+                        <p class="text-blue-200 text-sm">Active Volunteers</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center">
+                        <div class="text-4xl font-extrabold text-green-400 mb-2">25+</div>
+                        <p class="text-blue-200 text-sm">Active Programs</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center">
+                        <div class="text-4xl font-extrabold text-green-400 mb-2">$2M+</div>
+                        <p class="text-blue-200 text-sm">Funds Raised</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section id="cta-section" class="hidden py-20 bg-gradient-to-r from-green-600 to-green-700 text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Be Part of Our Mission</h2>
+            <p class="text-green-100 text-lg mb-8">Your support helps us continue creating sustainable change in communities across India.</p>
+            <a href="contact_new.html" class="bg-white text-green-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-50 transition shadow-lg inline-block">Support Us Now</a>
+        </div>
+    </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="max-w-6xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"><i class="fas fa-hand-holding-heart text-white"></i></div><span class="text-xl font-bold text-white">Glo-CED <span class="text-green-400">India</span></span></div><p class="text-gray-400 text-sm leading-relaxed">Building character, ethical leadership, and social transformation.</p><div class="flex gap-4 mt-6"><a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a><a href="#" class="w-9 h-9 bg-gray-800 hover:bg-pink-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition"><i class="fab fa-linkedin-in text-sm"></i></a></div></div>
+                <div><h4 class="text-white font-semibold text-lg mb-6">Contact Info</h4><ul class="space-y-4 text-sm"><li class="flex items-start gap-3"><i class="fas fa-map-marker-alt mt-1 text-green-400"></i><span>Your Address, City, Country</span></li><li class="flex items-start gap-3"><i class="fas fa-phone-alt mt-1 text-green-400"></i><a href="tel:+919087654321" class="hover:text-white transition">+91 (0) 908-765-4321</a></li><li class="flex items-start gap-3"><i class="fas fa-envelope mt-1 text-green-400"></i><a href="mailto:info@gloced.org" class="hover:text-white transition">info@gloced.org</a></li></ul></div>
+                <div><h4 class="text-white font-semibold text-lg mb-6">Quick Links</h4><ul class="space-y-3 text-sm"><li><a href="programs.html" class="hover:text-white transition">Our Programs</a></li><li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li><li><a href="contact_new.html" class="hover:text-white transition">Contact Us</a></li></ul></div>
+                <div><h4 class="text-white font-semibold text-lg mb-6">Newsletter</h4><p class="text-gray-400 text-sm mb-4">Stay updated with our latest initiatives.</p><form class="flex"><input type="email" placeholder="Email Address" class="flex-1 bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-l-lg text-sm focus:outline-none focus:border-blue-500 placeholder-gray-500"><button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-r-lg transition"><i class="fas fa-paper-plane"></i></button></form></div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800"><div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500"><p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Glo-CED India. All rights reserved.</p><p class="mt-2 md:mt-0">Template by <a href="https://colorlib.com" target="_blank" class="text-gray-400 hover:text-white transition">Colorlib</a></p></div></div>
+    </footer>
+
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-700 hover:bg-blue-800 text-white rounded-full shadow-lg hidden items-center justify-center transition z-50"><i class="fas fa-chevron-up"></i></button>
+    <script>
+        function toggleMobileMenu(){const m=document.getElementById('mobile-menu');const b=document.getElementById('mobile-menu-btn');m.classList.toggle('hidden');b.innerHTML=m.classList.contains('hidden')?'<i class="fas fa-bars"></i>':'<i class="fas fa-times"></i>';}
+        window.addEventListener('scroll',function(){const n=document.getElementById('navbar');if(window.scrollY>50){n.classList.add('nav-scrolled')}else{n.classList.remove('nav-scrolled')}const b=document.getElementById('back-top');if(window.scrollY>400){b.classList.remove('hidden');b.classList.add('flex')}else{b.classList.add('hidden');b.classList.remove('flex')}});
+    </script>
+</body>
+</html>

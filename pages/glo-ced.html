@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Glo-CED India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      html { scroll-behavior: smooth; }
+      .nav-scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased">
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300">
+        <div class="hidden lg:block bg-blue-900 text-white text-sm">
+            <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+                <div class="flex items-center gap-6"><span><i class="fas fa-phone-alt mr-2"></i>+91 (0) 123 456 7890</span><span><i class="fas fa-envelope mr-2"></i>info@gloced.org</span></div>
+                <div class="flex items-center gap-4"><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-facebook-f"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-twitter"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-linkedin-in"></i></a><a href="#" class="hover:text-blue-200 transition"><i class="fab fa-instagram"></i></a></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="assets/img/logo/logo.png" alt="Glo-CED India" class="w-10 h-10 object-contain">
+                <span class="text-xl font-bold text-blue-900">Glo-CED <span class="text-green-600">India</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Home</a>
+                <a href="programs.html" class="text-gray-600 hover:text-blue-700 font-medium transition">What We Do</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Gallery</a>
+                <a href="contact_new.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Contact</a>
+            </div>
+            <div class="hidden lg:flex"><a href="contact_new.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold transition shadow-md">Donate</a></div>
+            <button id="mobile-menu-btn" class="lg:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t px-6 pb-6"><div class="flex flex-col gap-4 pt-4"><a href="index.html" class="text-gray-600 py-2">Home</a><a href="programs.html" class="text-gray-600 py-2">What We Do</a><a href="gallery.html" class="text-gray-600 py-2">Gallery</a><a href="contact_new.html" class="text-gray-600 py-2">Contact</a><a href="contact_new.html" class="bg-green-600 text-white text-center py-3 rounded-lg font-semibold mt-2">Donate</a></div></div>
+    </nav>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="bg-blue-900 pt-32 pb-20 text-white text-center">
+            <div class="max-w-4xl mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">About Glo-CED India</h1>
+                <p class="text-blue-200 text-lg">Our Mission, Vision, and Commitment to Positive Change</p>
+            </div>
+        </section>
+
+        <!-- LEADERSHIP SECTION -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">Leadership</h2>
+                <p class="text-center text-gray-600 mb-12 text-lg">Trust Registration No. <span class="font-semibold text-blue-900">302 of 2025</span></p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">President</h3>
+                        <p class="text-gray-600 font-semibold">Ninan John P.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Secretary</h3>
+                        <p class="text-gray-600 font-semibold">Ambedkar M. Sekar</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Treasurer</h3>
+                        <p class="text-gray-600 font-semibold">James Verghese</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Glo-CED India</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-8">Glo-CED India is dedicated to character building, ethical leadership, and social transformation. We are committed to promoting holistic development from the individual to the nation. We nurture ethically grounded, value-driven, and socially responsible citizens through character building, ethical leadership, and transformative development initiatives.</p>
+            </div>
+        </section>
+
+        <!-- VISION SECTION -->
+        <section class="py-20 bg-blue-50">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Vision of Glo-CED India</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">To promote holistic development from the individual to the nation by nurturing ethically grounded, value-driven, and socially responsible citizens through character building, ethical leadership, and transformative development, thereby contributing to sustainable social and economic progress and inclusive nation-building.</p>
+            </div>
+        </section>
+
+        <!-- MISSION SECTION -->
+        <section class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Mission Statement of Glo-CED India</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">The Mission of the Trust is to empower Indian citizens and grassroots communities through comprehensive and inclusive education by fostering ethical leadership, advancing research in sustainable development, and delivering ICT-enabled capacity-building initiatives. The Trust shall function as a strategic bridge between research and policy, translating evidence-based knowledge into actionable solutions, in collaboration with Government bodies, Non-Governmental Organizations, and other stakeholders, for the effective implementation of impactful programmes in health, education, skill development, sustainable development, and livelihood enhancement, thereby contributing to the creation of a resilient, informed, and self-reliant nation.</p>
+            </div>
+        </section>
+
+        <!-- VALUES SECTION -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">Value Statement of Glo-CED</h2>
+                <p class="text-lg text-gray-600 mb-12 text-center leading-relaxed">The Value Statement of Glo-CED defines the core principles that guide our organization's behaviour and decision-making. We stand on these four pillars:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-blue-600">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3 flex items-center gap-3">
+                            <i class="fas fa-handshake text-blue-600"></i>
+                            Integrity & Ethical Leadership
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed">We hold ourselves to the highest ethical standards, ensuring that our leadership and programs serve as a trusted model for the communities and individuals we empower.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-green-600">
+                        <h3 class="text-2xl font-bold text-green-900 mb-3 flex items-center gap-3">
+                            <i class="fas fa-chart-line text-green-600"></i>
+                            Evidence-Based Impact
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed">We are committed to rigorous research and data-driven solutions, ensuring our programs in health, education, and livelihood are both effective and sustainable.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-purple-600">
+                        <h3 class="text-2xl font-bold text-purple-900 mb-3 flex items-center gap-3">
+                            <i class="fas fa-users text-purple-600"></i>
+                            Inclusivity & Empowerment
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed">We believe in the inherent potential of every citizen and prioritize grassroots participation to ensure that development is equitable and reaches the most marginalized.</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-orange-600">
+                        <h3 class="text-2xl font-bold text-orange-900 mb-3 flex items-center gap-3">
+                            <i class="fas fa-lightbulb text-orange-600"></i>
+                            Collaborative Innovation
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed">We embrace the power of ICT and strategic partnerships with government and NGOs to create scalable, forward-thinking solutions for a resilient nation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="assets/img/logo/logo.png" alt="Glo-CED" class="w-10 h-10 object-contain filter brightness-0 invert">
+                        <span class="text-xl font-bold text-white">Glo-CED <span class="text-green-400">India</span></span>
+                    </div>
+                    <p class="text-sm leading-relaxed">Building character and social transformation through ethical leadership and inclusive development.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition">Our Programs</a></li>
+                        <li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li>
+                        <li><a href="contact_new.html" class="hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-instagram text-sm"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Contact Info</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><i class="fas fa-phone-alt mr-3"></i>+91 (0) 123 456 7890</li>
+                        <li><i class="fas fa-envelope mr-3"></i>info@gloced.org</li>
+                        <li><i class="fas fa-map-marker-alt mr-3"></i>India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-sm">&copy; 2024 Glo-CED India. All rights reserved. | Trust Registration No. 302 of 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        window.addEventListener('scroll', function(){
+            const n = document.getElementById('navbar');
+            if(window.scrollY > 50){
+                n.classList.add('nav-scrolled');
+            } else {
+                n.classList.remove('nav-scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

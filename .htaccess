@@ -1,0 +1,18 @@
+# STP Website - Apache Configuration (Apache 2.4 compatible)
+RewriteEngine On
+
+# Deny direct access to sensitive folders
+RewriteRule ^config/ - [F,L]
+RewriteRule ^backend/ - [F,L]
+
+# Redirect root requests to pages/index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^$ pages/index.html [L]
+
+# Serve pages from /pages/ for requests like /page.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([A-Za-z0-9_-]+)\.html$ pages/$1.html [L]
+
+# Allow direct access to admin folder files (admin/ will serve as-is)

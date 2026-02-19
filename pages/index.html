@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glo-CED India | Character Building & Ethical Leadership</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      html { scroll-behavior: smooth; }
+      .nav-scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+      .hero-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1d4ed8 100%); }
+      .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+      .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+      .animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+      .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
+      .animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
+      .animate-delay-600 { animation-delay: 0.6s; opacity: 0; }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased">
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300">
+        <!-- Top Bar -->
+        <div class="hidden lg:block bg-blue-900 text-white text-sm">
+            <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+                <div class="flex items-center gap-6">
+                    <span><i class="fas fa-phone-alt mr-2"></i>+91 (0) 123 456 7890</span>
+                    <span><i class="fas fa-envelope mr-2"></i>info@gloced.org</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Main Nav -->
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="assets/img/logo/logo.png" alt="Glo-CED India" class="w-10 h-10 object-contain">
+                <span class="text-xl font-bold text-blue-900">Glo-CED <span class="text-green-600">India</span></span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-blue-900 font-semibold border-b-2 border-blue-600 pb-1">Home</a>
+                <a href="programs.html" class="text-gray-600 hover:text-blue-700 font-medium transition">What We Do</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Gallery</a>
+                
+                <a href="contact_new.html" class="text-gray-600 hover:text-blue-700 font-medium transition">Contact</a>
+                <a href="admin/admin_submissions.php" class="admin-only text-gray-600 hover:text-blue-700 font-medium transition" style="display:none;">Admin</a>
+            </div>
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="contact_new.html" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold transition shadow-md hover:shadow-lg">Donate</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-gray-700 text-2xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white border-t px-6 pb-6">
+            <div class="flex flex-col gap-4 pt-4">
+                <a href="index.html" class="text-blue-700 font-semibold py-2">Home</a>
+                <a href="programs.html" class="text-gray-600 hover:text-blue-700 py-2">What We Do</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-blue-700 py-2">Gallery</a>
+                
+                <a href="contact_new.html" class="text-gray-600 hover:text-blue-700 py-2">Contact</a>
+                <a href="contact_new.html" class="bg-green-600 text-white text-center py-3 rounded-lg font-semibold mt-2">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-gradient min-h-screen flex items-center justify-center text-center text-white relative overflow-hidden pt-20">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-green-400 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <span class="inline-block bg-white/20 backdrop-blur-sm text-sm font-semibold px-4 py-2 rounded-full mb-6 animate-fade-in-up">
+                <i class="fas fa-heart mr-2"></i>Character Building & Ethical Leadership
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in-up animate-delay-200">
+                Glo-CED India
+            </h1>
+            <p class="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animate-delay-400">
+                Dedicated to nurturing ethically grounded, value-driven citizens through comprehensive education, research, and transformative development initiatives.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animate-delay-600">
+                </a>
+                <a href="contact_new.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-800 transition">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOCUS AREA CARDS ==================== -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Our Focus Areas</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Building Character, Ethical Leadership<br class="hidden md:block"> & Social Transformation</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md card-hover text-center">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Character Building</h3>
+                    <p class="text-gray-600 leading-relaxed">Developing moral foundations and personal integrity through comprehensive educational programs and mentorship that nurture responsible individuals.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md card-hover text-center">
+                    <div class="w-16 h-16 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Ethical Leadership</h3>
+                    <p class="text-gray-600 leading-relaxed">Cultivating leaders who make decisions based on ethical principles, transparency, and commitment to the greater good of society.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-md card-hover text-center">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Social Transformation</h3>
+                    <p class="text-gray-600 leading-relaxed">Creating systemic change through collaborative initiatives that address root causes of social challenges and build sustainable development pathways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">About Our Foundation</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-6">We Are On A Mission To Help The Helpless</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">Glo-CED India is committed to promoting holistic development from the individual to the nation. We nurture ethically grounded, value-driven, and socially responsible citizens through character building, ethical leadership, and transformative development initiatives.</p>
+                    <p class="text-gray-600 leading-relaxed mb-8">Together, we envision a resilient India that contributes to sustainable social and economic progress and inclusive nation-building.</p>
+
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <div class="bg-blue-100 rounded-2xl w-full h-80 flex items-center justify-center">
+                            <div class="text-center text-blue-300">
+                                <i class="fas fa-image text-6xl mb-4"></i>
+                                <p class="font-medium">Foundation Image</p>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-green-600 text-white rounded-2xl px-6 py-4 shadow-lg">
+                            <span class="text-3xl font-bold">10+</span>
+                            <p class="text-sm font-medium">Years of Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== IMPACT STATS ==================== -->
+    <section class="py-16 bg-blue-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-green-400 mb-2" data-count="6200">0</div>
+                    <p class="text-blue-200 font-medium">Donations Received</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-green-400 mb-2" data-count="80">0</div>
+                    <p class="text-blue-200 font-medium">Funds Raised</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-green-400 mb-2" data-count="256">0</div>
+                    <p class="text-blue-200 font-medium">Volunteers Active</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-extrabold text-green-400 mb-2" data-count="25">0</div>
+                    <p class="text-blue-200 font-medium">Programs Running</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Latest Causes removed per request -->
+
+    <!-- Events removed -->
+
+    <!-- ==================== TEAM ==================== -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Our People</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Expert Volunteers Always Ready</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover text-center">
+                    <div class="h-48 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+                        <i class="fas fa-user text-5xl text-blue-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-gray-900">Bruce Roberts</h4>
+                        <p class="text-gray-500 text-sm">Volunteer Leader</p>
+                        <div class="flex justify-center gap-3 mt-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover text-center">
+                    <div class="h-48 bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
+                        <i class="fas fa-user text-5xl text-green-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-gray-900">Robart Richard</h4>
+                        <p class="text-gray-500 text-sm">Volunteer Leader</p>
+                        <div class="flex justify-center gap-3 mt-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover text-center">
+                    <div class="h-48 bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center">
+                        <i class="fas fa-user text-5xl text-amber-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-gray-900">Brendon Tailor</h4>
+                        <p class="text-gray-500 text-sm">Volunteer Leader</p>
+                        <div class="flex justify-center gap-3 mt-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover text-center">
+                    <div class="h-48 bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center">
+                        <i class="fas fa-user text-5xl text-purple-300"></i>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-gray-900">Walsh Hart</h4>
+                        <p class="text-gray-500 text-sm">Volunteer Leader</p>
+                        <div class="flex justify-center gap-3 mt-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LEADERSHIP SECTION ==================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Leadership</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Meet Our Leadership Team</h2>
+                <p class="text-gray-600 mt-4 text-lg">Trust Registration No. <span class="font-semibold text-blue-900">302 of 2025</span></p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-md border-t-4 border-blue-600 text-center card-hover">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">President</h3>
+                    <p class="text-gray-600 font-semibold">Ninan John P.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-md border-t-4 border-green-600 text-center card-hover">
+                    <div class="w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Secretary</h3>
+                    <p class="text-gray-600 font-semibold">Ambedkar M. Sekar</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-md border-t-4 border-amber-600 text-center card-hover">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fas fa-user-tie"></i></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Treasurer</h3>
+                    <p class="text-gray-600 font-semibold">James Verghese</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VISION & MISSION ==================== -->
+    <section class="py-20 bg-blue-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white rounded-xl p-10 shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center"><i class="fas fa-eye text-xl"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-900">Vision</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">To promote holistic development from the individual to the nation by nurturing ethically grounded, value-driven, and socially responsible citizens through character building, ethical leadership, and transformative development, thereby contributing to sustainable social and economic progress and inclusive nation-building.</p>
+                </div>
+                <div class="bg-white rounded-xl p-10 shadow-md">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-100 text-green-700 rounded-lg flex items-center justify-center"><i class="fas fa-target text-xl"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-900">Mission</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">The Mission of the Trust is to empower Indian citizens and grassroots communities through comprehensive and inclusive education by fostering ethical leadership, advancing research in sustainable development, and delivering ICT-enabled capacity-building initiatives. The Trust shall function as a strategic bridge between research and policy, translating evidence-based knowledge into actionable solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VALUES SECTION ==================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Core Values</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">Value Statement of Glo-CED</h2>
+                <p class="text-gray-600 mt-4 text-lg leading-relaxed">The Value Statement of Glo-CED defines the core principles that guide our organization's behaviour and decision-making. We stand on these four pillars:</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-blue-600 card-hover">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3 flex items-center gap-3">
+                        <i class="fas fa-handshake text-blue-600 text-lg"></i>
+                        Integrity & Ethical Leadership
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">We hold ourselves to the highest ethical standards, ensuring that our leadership and programs serve as a trusted model for the communities and individuals we empower.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-green-600 card-hover">
+                    <h3 class="text-2xl font-bold text-green-900 mb-3 flex items-center gap-3">
+                        <i class="fas fa-chart-line text-green-600 text-lg"></i>
+                        Evidence-Based Impact
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">We are committed to rigorous research and data-driven solutions, ensuring our programs in health, education, and livelihood are both effective and sustainable.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-purple-600 card-hover">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-3 flex items-center gap-3">
+                        <i class="fas fa-users text-purple-600 text-lg"></i>
+                        Inclusivity & Empowerment
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">We believe in the inherent potential of every citizen and prioritize grassroots participation to ensure that development is equitable and reaches the most marginalized.</p>
+                </div>
+                <div class="bg-white rounded-xl p-8 shadow-md border-l-4 border-orange-600 card-hover">
+                    <h3 class="text-2xl font-bold text-orange-900 mb-3 flex items-center gap-3">
+                        <i class="fas fa-lightbulb text-orange-600 text-lg"></i>
+                        Collaborative Innovation
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">We embrace the power of ICT and strategic partnerships with government and NGOs to create scalable, forward-thinking solutions for a resilient nation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION (HIDDEN) ==================== -->
+    <section class="py-20 bg-gradient-to-r from-green-600 to-green-700 text-white hidden" aria-hidden="true">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Change The World With Humanity</h2>
+            <p class="text-green-100 text-lg mb-8 max-w-2xl mx-auto">Join hands with us to create a lasting impact. Every contribution, big or small, makes a difference in someone's life.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact_new.html" class="bg-white text-green-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-50 transition shadow-lg">Become A Volunteer</a>
+                <a href="contact_new.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-green-700 transition">Donate Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-green-600 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-12">What People Say About Us</h2>
+            <div class="bg-gray-50 rounded-2xl p-10 shadow-sm">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-user text-2xl text-blue-400"></i>
+                </div>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6 italic">"The work done by Glo-CED India has been truly transformative. Their dedication to character building and ethical leadership has positively impacted our entire community. I am proud to support their mission."</p>
+                <h4 class="font-bold text-gray-900">Margaret Lawson</h4>
+                <p class="text-gray-500 text-sm">Community Leader</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet Glo-CED India section removed per request -->
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="max-w-6xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Col 1: Logo -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-hand-holding-heart text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Glo-CED <span class="text-green-400">India</span></span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-sm">Building character, ethical leadership, and social transformation for a better India.</p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-400 rounded-lg flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-pink-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+                    </div>
+                </div>
+                <!-- Col 2: Contact -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Contact Info</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt mt-1 text-green-400"></i><span>Your Address,<br>City, Country</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone-alt mt-1 text-green-400"></i><a href="tel:+919087654321" class="hover:text-white transition">+91 (0) 908-765-4321</a></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope mt-1 text-green-400"></i><a href="mailto:info@gloced.org" class="hover:text-white transition">info@gloced.org</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3: Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+
+                        <li><a href="programs.html" class="hover:text-white transition">Our Programs</a></li>
+                        <li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li>
+                        <li><a href="contact_new.html" class="hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4: Newsletter -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Stay updated with our latest initiatives and impact stories.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Email Address" class="flex-1 bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-l-lg text-sm focus:outline-none focus:border-blue-500 placeholder-gray-500">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-r-lg transition"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Glo-CED India. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Template by <a href="https://colorlib.com" target="_blank" class="text-gray-400 hover:text-white transition">Colorlib</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 w-12 h-12 bg-blue-700 hover:bg-blue-800 text-white rounded-full shadow-lg hidden items-center justify-center transition z-50">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.toggle('hidden');
+            btn.innerHTML = menu.classList.contains('hidden') ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        }
+
+        // Navbar scroll shadow
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); } else { nav.classList.remove('nav-scrolled'); }
+        });
+
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-top');
+            if (window.scrollY > 400) { btn.classList.remove('hidden'); btn.classList.add('flex'); } else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('[data-count]');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-count'));
+                    let current = 0;
+                    const step = Math.ceil(target / 60);
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) { current = target; clearInterval(timer); }
+                        el.textContent = current.toLocaleString() + '+';
+                    }, 30);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+
+        // Admin auth check
+        (function(){
+            fetch('auth_status.php').then(r => r.json()).then(j => {
+                if (j && j.admin) { document.querySelectorAll('.admin-only').forEach(el => el.style.display = ''); }
+            }).catch(() => {});
+        })();
+    </script>
+</body>
+</html>
