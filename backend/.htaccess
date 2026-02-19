@@ -1,0 +1,30 @@
+# Backend API Protection
+# Allow only specific endpoints to be accessed directly
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /STP/backend/
+    
+    # Allow contact_process.php to be accessed
+    RewriteRule ^contact_process\.php$ - [L]
+    
+    # Deny access to other PHP files in this directory
+    RewriteRule ^(.*)\.php$ - [F,L]
+    
+    # Block directory listing
+    Options -Indexes
+</IfModule>
+
+# Block access to config files and includes
+<FilesMatch "(db_config|paths|\.env)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow only POST requests to contact_process.php
+<Files "contact_process.php">
+    <IfModule mod_rewrite.c>
+        RewriteCond %{REQUEST_METHOD} !^(POST|GET)$ [NC]
+        RewriteRule .* - [F,L]
+    </IfModule>
+</Files>

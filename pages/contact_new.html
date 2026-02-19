@@ -6,6 +6,7 @@
     <title>Contact Us | Glo-CED India</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../assets/js/path-config.js"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
       html { scroll-behavior: smooth; }
@@ -198,7 +199,8 @@
 
             if(valid){
                 var data = new FormData(form);
-                fetch('/STP/backend/contact_process.php', { method:'POST', body: data })
+                var apiUrl = (window.APP_CONFIG && window.APP_CONFIG.apiUrl) ? window.APP_CONFIG.apiUrl + '/contact_process.php' : '/STP/backend/contact_process.php';
+                fetch(apiUrl, { method:'POST', body: data })
                 .then(function(r){ return r.json(); })
                 .then(function(j){
                     if(j.success){ form.reset(); success.classList.remove('hidden'); setTimeout(function(){ success.classList.add('hidden'); }, 5000); }
