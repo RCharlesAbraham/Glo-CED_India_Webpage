@@ -1,36 +1,7 @@
 # Admin Panel Protection
-# Restrict access to authorized users only
+# Note: .htaccess rules are ignored on nginx servers
+# For production, configure nginx or contact hosting provider
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /admin/
-    
-    # Allow actual files and directories
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-</IfModule>
-
-# Block directory listing
+# Allow access to admin files
 Options -Indexes
 
-# Restrict access - only allow from specific IPs or require authentication
-# Option 1: IP-based restriction (uncomment and modify as needed)
-# <Limit GET POST>
-#     Order allow,deny
-#     Allow from 127.0.0.1
-#     Allow from YOUR_OFFICE_IP
-#     Deny from all
-# </Limit>
-
-# Option 2: HTTP Basic Authentication (uncomment to enable)
-# AuthType Basic
-# AuthName "Admin Panel"
-# AuthUserFile /path/to/.htpasswd
-# Require valid-user
-
-# Block access to PHP files except admin PHP files
-<FilesMatch "^(?!admin_).*\.php$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
