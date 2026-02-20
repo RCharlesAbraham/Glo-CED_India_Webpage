@@ -14,17 +14,28 @@ session_start();
 require_once '../config/db_config.php';
 require_once 'admin_users.php';
 
+// Check if database table exists
+$table_exists = true;
+$check_table = $conn->query("SHOW TABLES LIKE 'admins'");
+if (!$check_table || $check_table->num_rows == 0) {
+    $table_exists = false;
+}
+
 // Check if user submitted login form
 if (isset($_POST['login'])) {
-    $entered_user = trim($_POST['admin_user'] ?? '');
-    $entered_password = $_POST['admin_password'] ?? '';
-    if ($entered_user !== '' && verify_admin($entered_user, $entered_password)) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user'] = $entered_user;
-        header('Location: admin_submissions.php');
-        exit;
+    if (!$table_exists) {
+        $login_error = 'Database not configured. Please run the setup first.';
     } else {
-        $login_error = 'Invalid username or password. Please try again.';
+        $entered_user = trim($_POST['admin_user'] ?? '');
+        $entered_password = $_POST['admin_password'] ?? '';
+        if ($entered_user !== '' && verify_admin($entered_user, $entered_password)) {
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_user'] = $entered_user;
+            header('Location: admin_submissions.php');
+            exit;
+        } else {
+            $login_error = 'Invalid username or password. Please try again.';
+        }
     }
 }
 
@@ -150,10 +161,19 @@ if (isset($_SESSION['admin_logged_in'])) {
                                 <p class="text-blue-100 text-sm font-semibold mb-2">Total Submissions</p>
                                 <p class="text-4xl font-bold">
                                     <?php
-                                    $query = "SELECT COUNT(*) as count FROM contact_submissions";
-                                    $result = $conn->query($query);
-                                    $row = $result->fetch_assoc();
-                                    echo $row['count'] ?? 0;
+                                    $submissions_count = 0;
+                                    if ($table_exists) {
+                                        $check_submissions = $conn->query("SHOW TABLES LIKE 'contact_submissions'");
+                                        if ($check_submissions && $check_submissions->num_rows > 0) {
+                                            $query = "SELECT COUNT(*) as count FROM contact_submissions";
+                                            $result = $conn->query($query);
+                                            if ($result) {
+                                                $row = $result->fetch_assoc();
+                                                $submissions_count = $row['count'] ?? 0;
+                                            }
+                                        }
+                                    }
+                                    echo $submissions_count;
                                     ?>
                                 </p>
                             </div>
@@ -168,10 +188,16 @@ if (isset($_SESSION['admin_logged_in'])) {
                                 <p class="text-green-100 text-sm font-semibold mb-2">Admin Users</p>
                                 <p class="text-4xl font-bold">
                                     <?php
-                                    $query = "SELECT COUNT(*) as count FROM admins WHERE is_active = 1";
-                                    $result = $conn->query($query);
-                                    $row = $result->fetch_assoc();
-                                    echo $row['count'] ?? 0;
+                                    $admins_count = 0;
+                                    if ($table_exists) {
+                                        $query = "SELECT COUNT(*) as count FROM admins WHERE is_active = 1";
+                                        $result = $conn->query($query);
+                                        if ($result) {
+                                            $row = $result->fetch_assoc();
+                                            $admins_count = $row['count'] ?? 0;
+                                        }
+                                    }
+                                    echo $admins_count;
                                     ?>
                                 </p>
                             </div>
@@ -258,6 +284,20 @@ if (isset($_SESSION['admin_logged_in'])) {
 
                 <!-- Login Form -->
                 <form method="POST" class="space-y-6">
+                    <!-- Database Setup Required -->
+                    <?php if (!$table_exists): ?>
+                    <div class="bg-orange-50 border border-orange-200 text-orange-800 rounded-lg p-4 flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle mt-1 text-lg"></i>
+                        <div>
+                            <strong>Setup Required!</strong>
+                            <p class="text-sm mt-1">Please run the database setup first:</p>
+                            <a href="../admin_setup.php" class="inline-block mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-semibold transition">
+                                Open Setup Tool
+                            </a>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
                     <!-- Error Message -->
                     <?php if (isset($login_error)): ?>
                     <div class="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 flex items-start gap-3">

@@ -1,7 +1,3 @@
-
--- ============================================================================
--- ADMINS TABLE - Admin user accounts for the admin panel
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `admins` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `username` VARCHAR(100) UNIQUE NOT NULL,
@@ -17,9 +13,6 @@ CREATE TABLE IF NOT EXISTS `admins` (
     INDEX `idx_created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- CONTACT SUBMISSIONS TABLE - Contact form submissions from website visitors
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `contact_submissions` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
@@ -41,9 +34,6 @@ CREATE TABLE IF NOT EXISTS `contact_submissions` (
     FOREIGN KEY (`replied_by`) REFERENCES `admins`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- PROGRAMS/SERVICES TABLE - Organization programs and services
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `programs` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
@@ -61,9 +51,6 @@ CREATE TABLE IF NOT EXISTS `programs` (
     INDEX `idx_display_order` (`display_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- TEAM MEMBERS TABLE - Organization team/staff information
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `team_members` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `first_name` VARCHAR(100) NOT NULL,
@@ -81,9 +68,6 @@ CREATE TABLE IF NOT EXISTS `team_members` (
     INDEX `idx_display_order` (`display_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- GALLERY ITEMS TABLE - Gallery images and media
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `gallery_items` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
@@ -100,9 +84,6 @@ CREATE TABLE IF NOT EXISTS `gallery_items` (
     INDEX `idx_display_order` (`display_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- BLOG POSTS TABLE - Blog articles and news
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `blog_posts` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
@@ -125,9 +106,6 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
     FOREIGN KEY (`author_id`) REFERENCES `admins`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- TESTIMONIALS TABLE - Client/visitor testimonials
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `testimonials` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `author_name` VARCHAR(255) NOT NULL,
@@ -145,9 +123,6 @@ CREATE TABLE IF NOT EXISTS `testimonials` (
     INDEX `idx_display_order` (`display_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- EMAIL LOGS TABLE - Track all emails sent from the system
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `email_logs` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `recipient_email` VARCHAR(255) NOT NULL,
@@ -166,9 +141,6 @@ CREATE TABLE IF NOT EXISTS `email_logs` (
     FOREIGN KEY (`sent_by`) REFERENCES `admins`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- SYSTEM SETTINGS TABLE - Configurable site settings
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `system_settings` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `setting_key` VARCHAR(100) UNIQUE NOT NULL,
@@ -180,9 +152,6 @@ CREATE TABLE IF NOT EXISTS `system_settings` (
     INDEX `idx_setting_key` (`setting_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- ACTIVITY LOG TABLE - Track admin activity for audit purposes
--- ============================================================================
 CREATE TABLE IF NOT EXISTS `activity_logs` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `admin_id` INT,
@@ -201,19 +170,10 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
     FOREIGN KEY (`admin_id`) REFERENCES `admins`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================================================
--- DEFAULT DATA INSERTION
--- ============================================================================
-
--- Insert default admin user
--- Username: admin
--- Password: admin123 (bcrypt hashed)
--- Hash: $2y$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36P4/eS2
 INSERT INTO `admins` (`username`, `password_hash`, `email`, `full_name`, `is_active`) 
 VALUES ('admin', '$2y$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36P4/eS2', 'admin@glocedindia.org', 'System Administrator', 1)
 ON DUPLICATE KEY UPDATE `is_active` = 1;
 
--- Insert sample programs
 INSERT INTO `programs` (`title`, `slug`, `description`, `short_description`, `icon_class`, `color_class`, `is_active`, `display_order`) VALUES
 ('Education & Capacity Building', 'education-capacity', 'Comprehensive inclusive education programs and ICT-enabled skill development for grassroots community empowerment.', 'Education programs and skill development', 'fas fa-book', 'text-blue-700', 1, 1),
 ('Research & Policy Bridge', 'research-policy', 'Evidence-based knowledge generation with strategic links between research and policy for actionable solutions.', 'Research and policy integration', 'fas fa-chart-line', 'text-green-700', 1, 2),
@@ -221,14 +181,12 @@ INSERT INTO `programs` (`title`, `slug`, `description`, `short_description`, `ic
 ('Sustainable Development', 'sustainable-development', 'Inclusive development pathways promoting environmental responsibility and long-term social progress.', 'Environmental and development initiatives', 'fas fa-leaf', 'text-purple-700', 1, 4)
 ON DUPLICATE KEY UPDATE `is_active` = VALUES(`is_active`);
 
--- Insert sample testimonials
 INSERT INTO `testimonials` (`author_name`, `author_title`, `content`, `rating`, `is_featured`, `is_active`, `display_order`) VALUES
 ('Ramesh Kumar', 'Community Leader', 'Glo-CED India has transformed our community. Their education programs have changed the lives of hundreds of children.', 5, 1, 1, 1),
 ('Priya Sharma', 'Organization Director', 'An excellent organization dedicated to real change. Their holistic approach to development is truly commendable.', 5, 1, 1, 2),
 ('Dr. Anil Patel', 'Healthcare Professional', 'Their health initiatives have made a significant impact in our rural areas. Highly recommended!', 5, 0, 1, 3)
 ON DUPLICATE KEY UPDATE `is_active` = VALUES(`is_active`);
 
--- Insert sample system settings
 INSERT INTO `system_settings` (`setting_key`, `setting_value`, `setting_type`, `description`) VALUES
 ('organization_name', 'Glo-CED India', 'text', 'Official name of the organization'),
 ('organization_email', 'info@glocedindia.org', 'email', 'Primary contact email'),
@@ -240,25 +198,3 @@ INSERT INTO `system_settings` (`setting_key`, `setting_value`, `setting_type`, `
 ('admin_notification_email', 'admin@glocedindia.org', 'email', 'Email address to receive admin notifications'),
 ('copyright_year', '2026', 'text', 'Copyright year for footer')
 ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`);
-
--- ============================================================================
--- SUMMARY
--- ============================================================================
--- Tables created:
--- 1. admins - Admin user accounts
--- 2. contact_submissions - Website contact form submissions
--- 3. programs - Organization programs and services
--- 4. team_members - Team and staff information
--- 5. gallery_items - Gallery images and media
--- 6. blog_posts - Blog articles and news
--- 7. testimonials - Client testimonials
--- 8. email_logs - Email transaction logs
--- 9. system_settings - Configurable settings
--- 10. activity_logs - Admin activity audit trail
---
--- Default admin user:
--- Username: admin
--- Password: admin123
---
--- All tables have proper indexes for performance and support UTF-8 encoding
--- ============================================================================
