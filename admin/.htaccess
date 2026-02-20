@@ -1,7 +1,0 @@
-# Admin Panel Protection
-# Note: .htaccess rules are ignored on nginx servers
-# For production, configure nginx or contact hosting provider
-
-# Allow access to admin files
-Options -Indexes
-
