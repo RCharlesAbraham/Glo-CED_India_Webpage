@@ -1,13 +1,20 @@
 /**
  * Path Configuration for Frontend
  * Detects the correct base path for API calls and asset loading
- * Works with both /STP/ subdirectory and domain root deployment
+ * Works with /glo.tekquora.com/, /STP/ subdirectory, or domain root deployment
  */
 
 (function() {
-    // Detect if we're in /STP/ subdirectory or at domain root
+    // Detect if we're in /glo.tekquora.com/ or /STP/ subdirectory or at domain root
     const currentPath = window.location.pathname;
-    const basePath = currentPath.includes('/STP/') ? '/STP' : '';
+    let basePath = '';
+    
+    if (currentPath.includes('/glo.tekquora.com/')) {
+        basePath = '/glo.tekquora.com';
+    } else if (currentPath.includes('/STP/')) {
+        basePath = '/STP';
+    }
+    // else: basePath stays empty for root deployment
     
     window.APP_CONFIG = {
         basePath: basePath,

@@ -2,10 +2,15 @@
 /**
  * STP Website - Router (PHP-based for nginx compatibility)
  * Handles routing when .htaccess is not available
+ * Supports /glo.tekquora.com/, /STP/, or root domain deployments
  */
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$requestUri = str_replace('/index.php', '', $requestUri); // Remove index.php if present
+
+// Remove subdirectory paths (/glo.tekquora.com/, /STP/, etc.) and /index.php
+$requestUri = preg_replace('|^/glo\.tekquora\.com|', '', $requestUri);
+$requestUri = preg_replace('|^/STP|', '', $requestUri);
+$requestUri = str_replace('/index.php', '', $requestUri);
 $requestUri = trim($requestUri, '/');
 
 // Determine the root path

@@ -9,9 +9,9 @@ session_start();
 require_once '../config/db_config.php';
 require_once 'admin_users.php';
 
-// Check authentication
+// Check authentication - redirect to login if not authenticated
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: admin_submissions.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -152,7 +152,10 @@ $conn->close();
                     <a href="admin_submissions.php" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline">Submissions</span>
                     </a>
-                    <a href="?logout=1" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="index.php" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                        <i class="fas fa-home"></i> <span class="hidden sm:inline">Dashboard</span>
+                    </a>
+                    <a href="index.php?logout=1" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Logout</span>
                     </a>
                 </div>

@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    # Enable rewriting
+    RewriteEngine On
+    
+    # Set the base path to match the subdirectory
+    RewriteBase /glo.tekquora.com/
+    
+    # Don't rewrite if the request is for an actual file or directory
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Rewrite all other requests to index.php
+    RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+</IfModule>

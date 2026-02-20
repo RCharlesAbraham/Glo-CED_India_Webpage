@@ -13,96 +13,9 @@ session_start();
 require_once '../config/db_config.php';
 require_once 'admin_users.php';
 
-// Check if user submitted login form
-if (isset($_POST['login'])) {
-    $entered_user = trim($_POST['admin_user'] ?? '');
-    $entered_password = $_POST['admin_password'] ?? '';
-    if ($entered_user !== '' && verify_admin($entered_user, $entered_password)) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_user'] = $entered_user;
-    } else {
-        $login_error = 'Invalid username or password. Please try again.';
-    }
-}
-
-// Check logout
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header('Location: admin_submissions.php');
-    exit;
-}
-
-// If not logged in, show login form
-// If not logged in, show login form
-// If not logged in, show login form
-if (!isset($_SESSION['admin_logged_in'])) {
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Login | Glo-CED India</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-            body { font-family: 'Inter', sans-serif; }
-        </style>
-    </head>
-    <body class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-md">
-            <!-- Logo / Branding -->
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-hands-helping text-white text-2xl"></i>
-                </div>
-                <h1 class="text-2xl font-bold text-white">Glo-CED India</h1>
-                <p class="text-blue-300 text-sm mt-1">Admin Panel</p>
-            </div>
-
-            <!-- Login Card -->
-            <div class="bg-white rounded-2xl shadow-2xl p-8">
-                <h2 class="text-xl font-bold text-gray-900 text-center mb-6">Sign In</h2>
-
-                <?php if (isset($login_error)): ?>
-                    <div class="mb-5 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-3 text-sm">
-                        <i class="fas fa-exclamation-circle text-red-500"></i>
-                        <span><?php echo htmlspecialchars($login_error); ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <form method="POST" class="space-y-5">
-                    <div>
-                        <label for="admin_user" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                        <div class="relative">
-                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"><i class="fas fa-user"></i></span>
-                            <input type="text" id="admin_user" name="admin_user" required
-                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                placeholder="Enter username">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <div class="relative">
-                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"><i class="fas fa-lock"></i></span>
-                            <input type="password" id="password" name="admin_password" required
-                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-                                placeholder="Enter password">
-                        </div>
-                    </div>
-                    <button type="submit" name="login"
-                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-                        <i class="fas fa-sign-in-alt"></i> Sign In
-                    </button>
-                </form>
-            </div>
-
-            <p class="text-center text-blue-300/60 text-xs mt-6">&copy; 2025 Glo-CED India. All rights reserved.</p>
-        </div>
-    </body>
-    </html>
-    <?php
+// Check authentication - redirect to login if not authenticated
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: index.php');
     exit;
 }
  
@@ -207,15 +120,18 @@ while ($row = $stats_result->fetch_assoc()) {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-4">
-                    <a href="index.html" class="text-white font-bold text-xl">Glo-CED India</a>
-                    <span class="hidden sm:inline-block text-blue-300 text-sm">| Admin Panel</span>
+                    <a href="index.php" class="text-white font-bold text-xl hover:text-blue-200 transition"><i class="fas fa-lock-open mr-2"></i>Glo-CED Admin</a>
+                    <span class="hidden sm:inline-block text-blue-300 text-sm">| Submissions</span>
                 </div>
                 <div class="flex items-center gap-2 sm:gap-3">
                     <span class="hidden md:inline text-blue-200 text-sm">Welcome, <?php echo htmlspecialchars($_SESSION['admin_user'] ?? 'Admin'); ?></span>
+                    <a href="index.php" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                        <i class="fas fa-home"></i> <span class="hidden sm:inline">Dashboard</span>
+                    </a>
                     <a href="admin_manage_users.php" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-users-cog"></i> <span class="hidden sm:inline">Users</span>
                     </a>
-                    <a href="?logout=1" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="index.php?logout=1" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Logout</span>
                     </a>
                 </div>
