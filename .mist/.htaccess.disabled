@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    # Disabled to avoid rewrite loops while debugging
+    # Original contents moved here as a backup
+    RewriteEngine On
+    RewriteBase /Glo-CED_India_Webpage/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/index\.php
+    RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+</IfModule>

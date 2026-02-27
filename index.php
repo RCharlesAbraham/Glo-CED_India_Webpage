@@ -7,9 +7,10 @@
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Remove subdirectory paths (/glo.tekquora.com/, /STP/, etc.) and /index.php
+// Remove subdirectory paths (/glo.tekquora.com/, /STP/, /Glo-CED_India_Webpage/, etc.) and /index.php
 $requestUri = preg_replace('|^/glo\.tekquora\.com|', '', $requestUri);
 $requestUri = preg_replace('|^/STP|', '', $requestUri);
+$requestUri = preg_replace('|^/Glo-CED_India_Webpage|i', '', $requestUri);
 $requestUri = str_replace('/index.php', '', $requestUri);
 $requestUri = trim($requestUri, '/');
 
@@ -17,15 +18,15 @@ $requestUri = trim($requestUri, '/');
 $basePath = '/';
 
 // Protected directories - pass through directly
-if (preg_match('|^(backend|admin|assets|config|Doc|tools)(/|$)|', $requestUri)) {
+if (preg_match('/^(backend|admin|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
     if (strpos($requestUri, 'config') === 0) {
         // Block config directory
         http_response_code(403);
         echo 'Access Denied';
         exit;
     }
-    // Let the web server serve these directories
-    return false;
+    // Stop processing here to avoid internal redirect loops
+    exit;
 }
 
 // Determine which page to load
@@ -41,20 +42,41 @@ if (!preg_match('|^[a-zA-Z0-9_/.:-]*$|', $page)) {
 // Remove trailing slash
 $page = rtrim($page, '/');
 
-// Build filepath
-$baseDir = __DIR__ . '/pages/';
 
-// If page already has an extension, use it as-is
-if (pathinfo($page, PATHINFO_EXTENSION)) {
-    $filepath = $baseDir . $page;
-} else {
-    // No extension provided, add .html
-    $filepath = $baseDir . $page . '.html';
+// Search for the requested page in multiple candidate directories
+$baseDirs = [
+    __DIR__ . '/pages/',
+    __DIR__ . '/client/src/pages/',
+];
+
+$filepath = null;
+foreach ($baseDirs as $dir) {
+    if (pathinfo($page, PATHINFO_EXTENSION)) {
+        $candidate = $dir . $page;
+    } else {
+        $candidate = $dir . $page . '.html';
+    }
+
+    if (file_exists($candidate)) {
+        $filepath = $candidate;
+        break;
+    }
+
+    // If the page is a directory, try its index.html
+    if (is_dir($dir . $page) && file_exists($dir . $page . '/index.html')) {
+        $filepath = $dir . $page . '/index.html';
+        break;
+    }
 }
 
-// If file doesn't exist, fallback to index.html
-if (!file_exists($filepath)) {
-    $filepath = $baseDir . 'index.html';
+// If still not found, fall back to an index.html from the first available baseDir
+if (!$filepath) {
+    foreach ($baseDirs as $dir) {
+        if (file_exists($dir . 'index.html')) {
+            $filepath = $dir . 'index.html';
+            break;
+        }
+    }
 }
 
 // Load and serve the file

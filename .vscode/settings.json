@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "database/**/*.sql": "mysql",
+    "**/database/**/*.sql": "mysql"
+  }
+}
