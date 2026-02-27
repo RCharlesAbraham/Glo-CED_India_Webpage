@@ -1,55 +1,87 @@
 <?php
 /**
- * STP Website - Router (PHP-based for nginx compatibility)
- * Handles routing when .htaccess is not available
- * Supports /glo.tekquora.com/, /STP/, or root domain deployments
+ * STP Website - Router
+ * Handles routing for both Apache (.htaccess) and Nginx (try_files) deployments
+ * Supports /glo.tekquora.com/, /STP/, /Glo-CED_India_Webpage/, or root domain
  */
 
-// Get the request URI from either .htaccess rewrite (?route=) or direct request
-$requestUri = '';
-
+// Get the request URI
 if (isset($_GET['route'])) {
-    // Apache .htaccess rewrite: RewriteRule ^(.*)$ index.php?route=$1
-    $requestUri = '/' . ltrim($_GET['route'], '/');
+    // Apache .htaccess rewrite: index.php?route=...
+    $requestUri = $_GET['route'];
 } else {
-    // Direct request (nginx or .htaccess disabled)
+    // Nginx try_files or direct: use REQUEST_URI
     $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 }
 
-// Remove subdirectory paths (/glo.tekquora.com/, /STP/, /Glo-CED_India_Webpage/, etc.)
+// Remove subdirectory paths and clean up
 $requestUri = preg_replace('|^/glo\.tekquora\.com|', '', $requestUri);
 $requestUri = preg_replace('|^/STP|', '', $requestUri);
 $requestUri = preg_replace('|^/Glo-CED_India_Webpage|i', '', $requestUri);
 $requestUri = str_replace('/index.php', '', $requestUri);
 $requestUri = trim($requestUri, '/');
 
-// Protected directories - pass through directly
+// ========== ADMIN ROUTES ==========
+if (preg_match('#^admin(/.*)?$#i', $requestUri, $m)) {
+    $adminSub = isset($m[1]) ? trim($m[1], '/') : '';
+    
+    // Map clean URLs to actual admin PHP files
+    $adminRoutes = [
+        ''              => 'index.php',
+        'submissions'   => 'admin_submissions.php',
+        'users'         => 'admin_manage_users.php',
+        'get-submission'=> 'admin_get_submission.php',
+        'auth_status.php' => '../pages/auth_status.php',
+    ];
+    
+    $adminDir = __DIR__ . '/client/src/admin/';
+    
+    if (isset($adminRoutes[$adminSub])) {
+        $file = $adminDir . $adminRoutes[$adminSub];
+    } else {
+        // Try admin_<name>.php then <name>.php
+        $file = $adminDir . 'admin_' . $adminSub . '.php';
+        if (!file_exists($file)) {
+            $file = $adminDir . $adminSub . '.php';
+        }
+        if (!file_exists($file)) {
+            $file = $adminDir . $adminSub;
+        }
+    }
+    
+    if (file_exists($file)) {
+        chdir(dirname($file));
+        include $file;
+        exit;
+    }
+    
+    // Admin file not found
+    http_response_code(404);
+    echo '<!DOCTYPE html><html><body><h1>404 - Not Found</h1></body></html>';
+    exit;
+}
+
+// ========== PROTECTED DIRECTORIES ==========
 if (preg_match('/^(backend|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
     if (strpos($requestUri, 'config') === 0) {
-        // Block config directory
         http_response_code(403);
         echo 'Access Denied';
         exit;
     }
-    // Stop processing here to avoid internal redirect loops
     exit;
 }
 
-// Determine which page to load
+// ========== PAGE ROUTING ==========
 $page = $requestUri ?: 'index';
 
-// Only allow alphanumeric, hyphens, underscores, dots, and forward slashes
 if (!preg_match('|^[a-zA-Z0-9_/.:-]*$|', $page)) {
     http_response_code(400);
     echo 'Bad Request';
     exit;
 }
 
-// Remove trailing slash
 $page = rtrim($page, '/');
 
-
-// Search for the requested page in multiple candidate directories
 $baseDirs = [
     __DIR__ . '/pages/',
     __DIR__ . '/client/src/pages/',
@@ -68,14 +100,12 @@ foreach ($baseDirs as $dir) {
         break;
     }
 
-    // If the page is a directory, try its index.html
     if (is_dir($dir . $page) && file_exists($dir . $page . '/index.html')) {
         $filepath = $dir . $page . '/index.html';
         break;
     }
 }
 
-// If still not found, fall back to an index.html from the first available baseDir
 if (!$filepath) {
     foreach ($baseDirs as $dir) {
         if (file_exists($dir . 'index.html')) {
@@ -85,8 +115,7 @@ if (!$filepath) {
     }
 }
 
-// Load and serve the file
-if (file_exists($filepath)) {
+if ($filepath && file_exists($filepath)) {
     header('Content-Type: text/html; charset=UTF-8');
     header('X-Powered-By: Glo-CED Router');
     readfile($filepath);
