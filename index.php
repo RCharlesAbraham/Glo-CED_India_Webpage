@@ -17,8 +17,42 @@ $requestUri = trim($requestUri, '/');
 // Determine the root path
 $basePath = '/';
 
+// Handle admin routes - serve admin panel files
+if (preg_match('/^admin(\/|$)/i', $requestUri)) {
+    $adminPath = str_replace('admin', '', $requestUri, 1);
+    $adminPath = trim($adminPath, '/');
+    
+    $adminBaseDirs = [
+        __DIR__ . '/client/src/admin/',
+    ];
+    
+    $adminFile = null;
+    foreach ($adminBaseDirs as $dir) {
+        if ($adminPath === '' || pathinfo($adminPath, PATHINFO_BASENAME) === '') {
+            // admin/ or admin -> admin/index.php
+            $candidate = $dir . 'index.php';
+        } else {
+            // admin/submissions -> admin/admin_submissions.php
+            $candidate = $dir . 'admin_' . $adminPath . '.php';
+            if (!file_exists($candidate)) {
+                $candidate = $dir . $adminPath . '.php';
+            }
+        }
+        
+        if (file_exists($candidate)) {
+            $adminFile = $candidate;
+            break;
+        }
+    }
+    
+    if ($adminFile && file_exists($adminFile)) {
+        include $adminFile;
+        exit;
+    }
+}
+
 // Protected directories - pass through directly
-if (preg_match('/^(backend|admin|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
+if (preg_match('/^(backend|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
     if (strpos($requestUri, 'config') === 0) {
         // Block config directory
         http_response_code(403);
