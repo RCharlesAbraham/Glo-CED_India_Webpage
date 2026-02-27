@@ -10,7 +10,7 @@
 session_start();
 
 // Include database configuration
-require_once '../config/db_config.php';
+require_once __DIR__ . '/../../../config/db_config.php';
 require_once 'admin_users.php';
 
 // Check authentication - redirect to login if not authenticated

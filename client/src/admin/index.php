@@ -11,7 +11,7 @@
 session_start();
 
 // Include database configuration
-require_once '../config/db_config.php';
+require_once __DIR__ . '/../../../config/db_config.php';
 require_once 'admin_users.php';
 
 // Check if database table exists
