@@ -1,0 +1,102 @@
+/* =====================================================
+   style.css  –  Global styles for Glo-CED India
+   ===================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-primary:   #0055a5;
+    --color-secondary: #ff6600;
+    --color-bg:        #f9f9f9;
+    --color-text:      #333333;
+    --color-white:     #ffffff;
+    --font-base:       'Segoe UI', Arial, sans-serif;
+    --border-radius:   6px;
+}
+
+body {
+    font-family: var(--font-base);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Header & Nav ---------------------------------- */
+header {
+    background-color: var(--color-primary);
+    padding: 1rem 2rem;
+}
+
+header nav a {
+    color: var(--color-white);
+    margin-right: 1.5rem;
+    font-weight: 600;
+}
+
+/* --- Main ------------------------------------------ */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Forms ----------------------------------------- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: .35rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: .6rem .8rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+button,
+.btn-primary {
+    display: inline-block;
+    padding: .65rem 1.4rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover,
+.btn-primary:hover {
+    background-color: #003d7a;
+}
+
+/* --- Footer ---------------------------------------- */
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: 3rem;
+}
