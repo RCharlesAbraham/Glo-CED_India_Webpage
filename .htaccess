@@ -5,9 +5,16 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
+    # Admin specific routes - only rewrite these exact paths
+    RewriteRule ^admin/?$ client/src/admin/index.php [L]
+    RewriteRule ^admin/submissions/?$ client/src/admin/admin_submissions.php [L]
+    RewriteRule ^admin/users/?$ client/src/admin/admin_manage_users.php [L]
+    RewriteRule ^admin/get-submission/?$ client/src/admin/admin_get_submission.php [L]
+
     # Don't rewrite index.php itself (prevent infinite loop)
     RewriteCond %{REQUEST_URI} !index\.php
 
-    # Route everything else through index.php
+    # Route everything else through index.php with route parameter
     RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
 </IfModule>
+

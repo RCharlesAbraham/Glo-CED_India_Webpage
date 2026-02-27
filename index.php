@@ -5,51 +5,23 @@
  * Supports /glo.tekquora.com/, /STP/, or root domain deployments
  */
 
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Get the request URI from either .htaccess rewrite (?route=) or direct request
+$requestUri = '';
 
-// Remove subdirectory paths (/glo.tekquora.com/, /STP/, /Glo-CED_India_Webpage/, etc.) and /index.php
+if (isset($_GET['route'])) {
+    // Apache .htaccess rewrite: RewriteRule ^(.*)$ index.php?route=$1
+    $requestUri = '/' . ltrim($_GET['route'], '/');
+} else {
+    // Direct request (nginx or .htaccess disabled)
+    $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+}
+
+// Remove subdirectory paths (/glo.tekquora.com/, /STP/, /Glo-CED_India_Webpage/, etc.)
 $requestUri = preg_replace('|^/glo\.tekquora\.com|', '', $requestUri);
 $requestUri = preg_replace('|^/STP|', '', $requestUri);
 $requestUri = preg_replace('|^/Glo-CED_India_Webpage|i', '', $requestUri);
 $requestUri = str_replace('/index.php', '', $requestUri);
 $requestUri = trim($requestUri, '/');
-
-// Determine the root path
-$basePath = '/';
-
-// Handle admin routes - serve admin panel files
-if (preg_match('/^admin(\/|$)/i', $requestUri)) {
-    $adminPath = str_replace('admin', '', $requestUri, 1);
-    $adminPath = trim($adminPath, '/');
-    
-    $adminBaseDirs = [
-        __DIR__ . '/client/src/admin/',
-    ];
-    
-    $adminFile = null;
-    foreach ($adminBaseDirs as $dir) {
-        if ($adminPath === '' || pathinfo($adminPath, PATHINFO_BASENAME) === '') {
-            // admin/ or admin -> admin/index.php
-            $candidate = $dir . 'index.php';
-        } else {
-            // admin/submissions -> admin/admin_submissions.php
-            $candidate = $dir . 'admin_' . $adminPath . '.php';
-            if (!file_exists($candidate)) {
-                $candidate = $dir . $adminPath . '.php';
-            }
-        }
-        
-        if (file_exists($candidate)) {
-            $adminFile = $candidate;
-            break;
-        }
-    }
-    
-    if ($adminFile && file_exists($adminFile)) {
-        include $adminFile;
-        exit;
-    }
-}
 
 // Protected directories - pass through directly
 if (preg_match('/^(backend|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
