@@ -51,7 +51,28 @@ if (preg_match('#^admin(/.*)?$#i', $requestUri, $m)) {
     
     if (file_exists($file)) {
         chdir(dirname($file));
+        ob_start();
         include $file;
+        $adminOutput = ob_get_clean();
+
+        // Compute base URL (same logic used for normal pages)
+        $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+        $baseUrl = '/';
+        if (strpos($script_name, '/Glo-CED_India_Webpage') !== false) {
+            $baseUrl = '/Glo-CED_India_Webpage/';
+        } elseif (strpos($script_name, '/STP/') !== false) {
+            $baseUrl = '/STP/';
+        } elseif (strpos($script_name, '/glo.tekquora.com') !== false) {
+            $baseUrl = '/glo.tekquora.com/';
+        }
+
+        if (!preg_match('/<base[^>]*>/i', $adminOutput)) {
+            $adminOutput = preg_replace('/<head(\s[^>]*)?>/i', "$0\n<base href=\"{$baseUrl}\">\n", $adminOutput, 1);
+        }
+
+        header('Content-Type: text/html; charset=UTF-8');
+        header('X-Powered-By: Glo-CED Router');
+        echo $adminOutput;
         exit;
     }
     

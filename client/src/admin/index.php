@@ -55,8 +55,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard | Glo-CED India</title>
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="client/public/css/tailwind.css">
+        <link rel="stylesheet" href="client/public/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { font-family: 'Inter', sans-serif; }
@@ -255,8 +255,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Login | Glo-CED India</title>
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="client/public/css/tailwind.css">
+        <link rel="stylesheet" href="client/public/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { 
