@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Scan all HTML and PHP files for Tailwind classes */
+@source "../../**/*.html";
+@source "../../**/*.php";
+@source "../../../*.php";
+
+/* Custom theme - matches the previous CDN config */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}

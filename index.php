@@ -71,6 +71,46 @@ if (preg_match('/^(backend|assets|config|Doc|tools)(\/|$)/i', $requestUri)) {
     exit;
 }
 
+// Serve existing files directly (static assets) or execute PHP files when requested.
+// This prevents the front-controller from returning HTML for asset requests (e.g. tailwind.css, images).
+$fsPath = __DIR__ . '/' . ltrim($requestUri, '/');
+if ($requestUri && file_exists($fsPath) && is_file($fsPath)) {
+    $ext = strtolower(pathinfo($fsPath, PATHINFO_EXTENSION));
+    $staticExts = ['css','js','png','jpg','jpeg','gif','svg','webp','woff2','woff','ttf','eot','otf','ico','map','json','pdf','txt','mp4','webmanifest'];
+    if (in_array($ext, $staticExts)) {
+        $mimeMap = [
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'png' => 'image/png',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'webp' => 'image/webp',
+            'woff2' => 'font/woff2',
+            'woff' => 'font/woff',
+            'ttf' => 'font/ttf',
+            'eot' => 'application/vnd.ms-fontobject',
+            'otf' => 'font/otf',
+            'ico' => 'image/x-icon',
+            'map' => 'application/json',
+            'json' => 'application/json',
+            'pdf' => 'application/pdf',
+            'mp4' => 'video/mp4',
+            'webmanifest' => 'application/manifest+json'
+        ];
+        $mime = $mimeMap[$ext] ?? (function_exists('mime_content_type') ? mime_content_type($fsPath) : 'application/octet-stream');
+        header('Content-Type: ' . $mime);
+        readfile($fsPath);
+        exit;
+    }
+    if ($ext === 'php') {
+        chdir(dirname($fsPath));
+        include $fsPath;
+        exit;
+    }
+}
+
 // ========== PAGE ROUTING ==========
 $page = $requestUri ?: 'index';
 
@@ -118,6 +158,29 @@ if (!$filepath) {
 if ($filepath && file_exists($filepath)) {
     header('Content-Type: text/html; charset=UTF-8');
     header('X-Powered-By: Glo-CED Router');
+
+    // Compute a base URL so that relative asset links in static HTML resolve
+    $script_name = $_SERVER['SCRIPT_NAME'] ?? '';
+    $baseUrl = '/';
+    if (strpos($script_name, '/Glo-CED_India_Webpage') !== false) {
+        $baseUrl = '/Glo-CED_India_Webpage/';
+    } elseif (strpos($script_name, '/STP/') !== false) {
+        $baseUrl = '/STP/';
+    } elseif (strpos($script_name, '/glo.tekquora.com') !== false) {
+        $baseUrl = '/glo.tekquora.com/';
+    }
+
+    $content = @file_get_contents($filepath);
+    if ($content !== false) {
+        // Inject <base> inside the first <head> tag if not already present
+        if (!preg_match('/<base[^>]*>/i', $content)) {
+            $content = preg_replace('/<head(\s[^>]*)?>/i', "$0\n<base href=\"{$baseUrl}\">\n", $content, 1);
+        }
+        echo $content;
+        exit;
+    }
+
+    // Fallback: stream file directly
     readfile($filepath);
 } else {
     http_response_code(404);

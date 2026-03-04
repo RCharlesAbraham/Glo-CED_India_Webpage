@@ -1,0 +1,27 @@
+{
+  "name": "glo-ced_india_webpage",
+  "version": "1.0.0",
+  "description": "A full-stack web project with a plain HTML/CSS/JS frontend and a PHP backend, running on XAMPP (Apache + MySQL).",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i client/src/css/input.css -o client/public/css/tailwind.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i client/src/css/input.css -o client/public/css/tailwind.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RCharlesAbraham/Glo-CED_India_Webpage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RCharlesAbraham/Glo-CED_India_Webpage/issues"
+  },
+  "homepage": "https://github.com/RCharlesAbraham/Glo-CED_India_Webpage#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "tailwindcss": "^4.2.1"
+  }
+}
