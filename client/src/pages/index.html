@@ -18,6 +18,16 @@
       .animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
       .animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
       .animate-delay-600 { animation-delay: 0.6s; opacity: 0; }
+            /* Fallback layout for hero section in case Tailwind responsive utilities aren't applied */
+            .hero-columns { display: flex; flex-direction: column; gap: 2.5rem; }
+            .hero-left { width: 100%; }
+            .hero-right { width: 100%; }
+            @media (min-width: 768px) {
+                .hero-columns { flex-direction: row; align-items: center; }
+                .hero-left { flex: 0 0 58.333333%; max-width: 58.333333%; }
+                .hero-right { flex: 0 0 41.666667%; max-width: 41.666667%; }
+                .hero-right .logo-wrap { display: flex; justify-content: flex-end; }
+            }
     </style>
 </head>
 <body class="font-sans text-gray-700 antialiased">
@@ -81,13 +91,15 @@
         >
         <!-- background set to light sky-blue; image and heavy overlay removed -->
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
-                <!-- Left: Hero text, left-aligned -->
-                <div class="text-left">
-                    <span class="inline-block bg-white/70 backdrop-blur-sm text-7xl md:text-2xl lg:text-4xl font-semibold px-4 py-2 rounded-full mb-6 text-blue-900 animate-fade-in-up whitespace-nowrap">
-                        <i class="fas fa-heart mr-2"></i>GLOBAL CENTER FOR ETHICS AND DEVELOPMENT
-                    </span>
-                    <h1 class="text-3x1 md:text-7xl font-extrabold mb-6 leading-tight text-blue-900 animate-fade-in-up animate-delay-200">
+            <div class="text-center mb-8">
+                <span class="inline-block mx-auto bg-white/80 backdrop-blur-sm text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold px-4 sm:px-5 py-3 rounded-3xl text-blue-900 animate-fade-in-up whitespace-normal leading-tight">
+                    <i class="fas fa-heart mr-2 sm:mr-3"></i>GLOBAL CENTER FOR ETHICS AND DEVELOPMENT
+                </span>
+            </div>
+            <div class="hero-columns grid grid-cols-1 md:grid-cols-12 items-center gap-10">
+                <!-- Left: Hero text, left-aligned (larger column) -->
+                <div class="hero-left text-left md:col-span-7 lg:col-span-8 md:w-7/12 lg:w-8/12">
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight text-blue-900 animate-fade-in-up animate-delay-200">
                         Glo-CED India
                     </h1>
                     <p class="text-lg md:text-xl text-blue-800 mb-8 leading-relaxed max-w-2xl animate-fade-in-up animate-delay-400">
@@ -103,9 +115,11 @@
                 </div>
 
                 <!-- Right: Large image box with logo -->
-                <div class="flex items-center justify-center md:justify-end">
-                    <div class="w-full max-w-lg h-72 md:h-80 bg-white/70 backdrop-blur-md rounded-3xl p-8 flex items-center justify-center shadow-xl">
-                        <img src="client/public/img/logo-bgr.png" alt="Glo-CED India Logo" class="w-64 h-64 md:w-72 md:h-72 object-contain mix-blend-multiply">
+                <div class="hero-right mt-6 md:mt-0 md:col-span-5 lg:col-span-4 md:w-5/12 lg:w-4/12">
+                    <div class="logo-wrap flex items-center justify-center md:justify-end">
+                        <div class="w-full max-w-md h-72 md:h-80 bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-8 flex items-center justify-center shadow-xl">
+                            <img src="client/public/img/logo-bgr.png" alt="Glo-CED India Logo" class="w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain mix-blend-multiply">
+                        </div>
                     </div>
                 </div>
             </div>

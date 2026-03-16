@@ -1,0 +1,66 @@
+# .htaccess for admin area
+# Place this file in: client/src/admin/.htaccess
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect some sensitive file patterns (deny access)
+<FilesMatch "\.(env|ini|log|sh|sql|bak|inc)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Protect a common config file name if present
+<Files "db_config.php">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Deny from all
+  </IfModule>
+</Files>
+
+# Security headers (optional, harmless)
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ---------- Rewrite rules for pretty admin routes ----------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Adjust this RewriteBase to match where your site is served from.
+  # Example for local XAMPP: /Glo-CED_India_Webpage/client/src/admin/
+  RewriteBase /Glo-CED_India_Webpage/client/src/admin/
+
+  # Pretty routes -> actual PHP endpoints
+  RewriteRule ^login/?$ index.php [L,QSA]
+  RewriteRule ^dashboard/?$ index.php [L,QSA]
+  RewriteRule ^submissions/?$ admin_submissions.php [L,QSA]
+  RewriteRule ^users/?$ admin_manage_users.php [L,QSA]
+  # single submission view (id captured)
+  RewriteRule ^submission/([0-9]+)/?$ admin_get_submission.php?id=$1 [L,QSA]
+  # AJAX endpoint alias
+  RewriteRule ^get-submission/?$ admin_get_submission.php [L,QSA]
+
+  # If requested resource exists (file/dir), serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback: send everything else to index.php (login/dashboard router)
+  RewriteRule ^.*$ index.php [L,QSA]
+</IfModule>
+
+# Optional: enable HTTP basic auth (commented out)
+# To use, create a .htpasswd and set the correct path below, then uncomment.
+#AuthType Basic
+#AuthName "Admin area"
+#AuthUserFile /full/path/to/.htpasswd
+#Require valid-user
