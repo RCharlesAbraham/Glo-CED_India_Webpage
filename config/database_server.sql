@@ -189,9 +189,9 @@ ON DUPLICATE KEY UPDATE `is_active` = VALUES(`is_active`);
 
 INSERT INTO `system_settings` (`setting_key`, `setting_value`, `setting_type`, `description`) VALUES
 ('organization_name', 'Glo-CED India', 'text', 'Official name of the organization'),
-('organization_email', 'info@glocedindia.org', 'email', 'Primary contact email'),
-('organization_phone', '+91 (0) 123 456 7890', 'phone', 'Primary contact phone number'),
-('organization_address', '123 Charity Street, City, State 12345, India', 'text', 'Physical address'),
+('organization_email', 'glocedindia@gmail.com', 'email', 'Primary contact email'),
+('organization_phone', '+91 9600048848', 'phone', 'Primary contact phone number'),
+('organization_address', 'No 2, Kaveri Street, Leela Nagar, Tambaram East, Chennai, 600059, Tamil Nadu, India', 'text', 'Physical address'),
 ('website_title', 'Glo-CED India | Character Building & Ethical Leadership', 'text', 'Website title'),
 ('website_description', 'Building character and driving social transformation through education, research, health, and sustainable development initiatives.', 'text', 'Website meta description'),
 ('enable_contact_form', '1', 'boolean', 'Enable/disable contact form submissions'),

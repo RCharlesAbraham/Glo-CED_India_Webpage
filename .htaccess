@@ -1,5 +1,15 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    # -- Canonical host & HTTPS enforcement (skip on localhost)
+    # Redirect to HTTPS when not already secure (avoids redirecting local dev)
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1) [NC]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+    # Redirect non-www to www (production only)
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1) [NC]
+    RewriteCond %{HTTP_HOST} !^www\.glocedindia\.com$ [NC]
+    RewriteRule ^(.*)$ https://www.glocedindia.com/$1 [L,R=301]
 
     # Don't rewrite requests for real files or directories
     RewriteCond %{REQUEST_FILENAME} !-f

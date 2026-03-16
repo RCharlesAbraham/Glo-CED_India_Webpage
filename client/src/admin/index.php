@@ -55,8 +55,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard | Glo-CED India</title>
-        <link rel="stylesheet" href="client/public/css/tailwind.css">
-        <link rel="stylesheet" href="client/public/vendor/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
+        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { font-family: 'Inter', sans-serif; }
@@ -255,8 +255,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Login | Glo-CED India</title>
-        <link rel="stylesheet" href="client/public/css/tailwind.css">
-        <link rel="stylesheet" href="client/public/vendor/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
+        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { 
@@ -271,96 +271,98 @@ if (isset($_SESSION['admin_logged_in'])) {
     </head>
     <body>
 
-        <div class="w-full max-w-md">
-            <div class="bg-white rounded-2xl shadow-2xl p-8">
-                <!-- Logo Section -->
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">
-                        <i class="fas fa-lock"></i>
+        <div class="min-h-screen flex items-center justify-center px-4">
+            <div class="w-full max-w-4xl">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-8 items-center">
+                <!-- Left: Login Card (text aligned left) -->
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <img src="/Glo-CED_India_Webpage/client/public/img/logo.png" alt="Glo-CED India Logo" class="w-24 mb-6 mx-auto block" >
+                    <!-- Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 text-center">Admin Panel</h1>
+                        <p class="text-gray-600 mt-2 text-center">Glo-CED India</p>
                     </div>
-                    <h1 class="text-3xl font-bold text-gray-900">Admin Panel</h1>
-                    <p class="text-gray-600 mt-2">Glo-CED India</p>
-                </div>
 
-                <!-- Login Form -->
-                <form method="POST" class="space-y-6">
-                    <!-- Database Setup Required -->
-                    <?php if (!$table_exists): ?>
-                    <div class="bg-orange-50 border border-orange-200 text-orange-800 rounded-lg p-4 flex items-start gap-3">
-                        <i class="fas fa-exclamation-triangle mt-1 text-lg"></i>
-                        <div>
-                            <strong>Setup Required!</strong>
-                            <p class="text-sm mt-1">Please run the database setup first:</p>
-                            <a href="../admin_setup.php" class="inline-block mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-semibold transition">
-                                Open Setup Tool
-                            </a>
+                    <!-- Login Form -->
+                    <form method="POST" class="space-y-6">
+                        <!-- Database Setup Required -->
+                        <?php if (!$table_exists): ?>
+                        <div class="bg-orange-50 border border-orange-200 text-orange-800 rounded-lg p-4 flex items-start gap-3">
+                            <i class="fas fa-exclamation-triangle mt-1 text-lg"></i>
+                            <div>
+                                <strong>Setup Required!</strong>
+                                <p class="text-sm mt-1">Please run the database setup first:</p>
+                                <a href="../admin_setup.php" class="inline-block mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-semibold transition">
+                                    Open Setup Tool
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <?php endif; ?>
+                        <?php endif; ?>
 
-                    <!-- Error Message -->
-                    <?php if (isset($login_error)): ?>
-                    <div class="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 flex items-start gap-3">
-                        <i class="fas fa-exclamation-circle mt-1"></i>
-                        <span><?php echo htmlspecialchars($login_error); ?></span>
-                    </div>
-                    <?php endif; ?>
+                        <!-- Error Message -->
+                        <?php if (isset($login_error)): ?>
+                        <div class="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 flex items-start gap-3">
+                            <i class="fas fa-exclamation-circle mt-1"></i>
+                            <span><?php echo htmlspecialchars($login_error); ?></span>
+                        </div>
+                        <?php endif; ?>
 
-                    <!-- Username Field -->
-                    <div>
-                        <label for="admin_user" class="block text-sm font-semibold text-gray-900 mb-2">
-                            <i class="fas fa-user mr-2"></i>Username
-                        </label>
-                        <input 
-                            type="text" 
-                            id="admin_user" 
-                            name="admin_user" 
-                            placeholder="Enter your username" 
-                            required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                            autocomplete="username"
+                        <!-- Username Field -->
+                        <div>
+                            <label for="admin_user" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-user mr-2"></i>Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="admin_user" 
+                                name="admin_user" 
+                                placeholder="Enter your username" 
+                                required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                                autocomplete="username"
+                            >
+                        </div>
+
+                        <!-- Password Field -->
+                        <div>
+                            <label for="admin_password" class="block text-sm font-semibold text-gray-900 mb-2">
+                                <i class="fas fa-lock mr-2"></i>Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="admin_password" 
+                                name="admin_password" 
+                                placeholder="Enter your password" 
+                                required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+                                autocomplete="current-password"
+                            >
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            name="login" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition shadow-md hover:shadow-lg flex items-center justify-center gap-2"
                         >
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+
+                    <!-- Info Message -->
+                    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-gray-700">
+                        <p class="flex items-start gap-2">
+                            <i class="fas fa-info-circle text-blue-600 mt-0.5"></i>
+                            <span>Use your admin credentials to access the admin panel. If you don't have credentials, contact your system administrator.</span>
+                        </p>
                     </div>
-
-                    <!-- Password Field -->
-                    <div>
-                        <label for="admin_password" class="block text-sm font-semibold text-gray-900 mb-2">
-                            <i class="fas fa-lock mr-2"></i>Password
-                        </label>
-                        <input 
-                            type="password" 
-                            id="admin_password" 
-                            name="admin_password" 
-                            placeholder="Enter your password" 
-                            required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
-                            autocomplete="current-password"
-                        >
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button 
-                        type="submit" 
-                        name="login" 
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-                    >
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                </form>
-
-                <!-- Info Message -->
-                <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-gray-700">
-                    <p class="flex items-start gap-2">
-                        <i class="fas fa-info-circle text-blue-600 mt-0.5"></i>
-                        <span>Use your admin credentials to access the admin panel. If you don't have credentials, contact your system administrator.</span>
-                    </p>
                 </div>
-
             </div>
 
             <!-- Footer -->
             <div class="text-center mt-8 text-white text-sm">
                 <p>&copy; 2026 Glo-CED India. All rights reserved.</p>
+            </div>
             </div>
         </div>
 
