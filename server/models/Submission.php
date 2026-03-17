@@ -8,9 +8,50 @@ require_once __DIR__ . '/../config/database.php';
 
 class Submission
 {
+    private static function resolveTable(PDO $pdo): ?string
+    {
+        static $resolved = null;
+        if ($resolved !== null) {
+            return $resolved;
+        }
+
+        $checkContact = $pdo->query("SHOW TABLES LIKE 'contact_submissions'");
+        if ($checkContact && $checkContact->fetchColumn()) {
+            $resolved = 'contact_submissions';
+            return $resolved;
+        }
+
+        $checkSubmissions = $pdo->query("SHOW TABLES LIKE 'submissions'");
+        if ($checkSubmissions && $checkSubmissions->fetchColumn()) {
+            $resolved = 'submissions';
+            return $resolved;
+        }
+
+        return null;
+    }
+
     public static function create(array $data): bool
     {
-        $pdo  = getDB();
+        $pdo = getDB();
+        $table = self::resolveTable($pdo);
+        if ($table === null) {
+            return false;
+        }
+
+        if ($table === 'contact_submissions') {
+            $stmt = $pdo->prepare(
+                'INSERT INTO contact_submissions (name, email, phone, message, ip_address, status) VALUES (?, ?, ?, ?, ?, ?)'
+            );
+            return $stmt->execute([
+                $data['name'],
+                $data['email'],
+                $data['phone'] ?? '',
+                $data['message'],
+                $data['ip_address'] ?? null,
+                'new',
+            ]);
+        }
+
         $stmt = $pdo->prepare(
             'INSERT INTO submissions (name, email, message) VALUES (?, ?, ?)'
         );

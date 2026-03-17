@@ -16,5 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$result = ContactController::submit($_POST);
-echo json_encode($result);
+try {
+    $result = ContactController::submit($_POST);
+    echo json_encode($result);
+} catch (Throwable $e) {
+    error_log('Route /server/routes/contact.php failed: ' . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Internal server error']);
+}

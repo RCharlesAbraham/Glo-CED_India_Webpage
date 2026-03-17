@@ -16,9 +16,10 @@ class ContactController
     {
         $name    = sanitize($data['name']    ?? '');
         $email   = sanitize($data['email']   ?? '');
+        $phone   = sanitize($data['phone']   ?? '');
         $message = sanitize($data['message'] ?? '');
 
-        if (empty($name) || empty($email) || empty($message)) {
+        if (empty($name) || empty($email) || empty($phone) || empty($message)) {
             return ['success' => false, 'message' => 'All fields are required.'];
         }
 
@@ -26,11 +27,18 @@ class ContactController
             return ['success' => false, 'message' => 'Invalid email address.'];
         }
 
-        $saved = Submission::create([
-            'name'    => $name,
-            'email'   => $email,
-            'message' => $message,
-        ]);
+        try {
+            $saved = Submission::create([
+                'name'       => $name,
+                'email'      => $email,
+                'phone'      => $phone,
+                'message'    => $message,
+                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+            ]);
+        } catch (Throwable $e) {
+            error_log('Contact submit failed: ' . $e->getMessage());
+            return ['success' => false, 'message' => 'Server error while saving your message.'];
+        }
 
         if ($saved) {
             return ['success' => true, 'message' => 'Your message has been sent!'];
