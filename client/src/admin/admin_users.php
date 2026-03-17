@@ -8,6 +8,9 @@
 
 function get_admin_user($username) {
     global $conn;
+    if (!($conn instanceof mysqli)) {
+        return null;
+    }
     $query = "SELECT username, password_hash FROM admins WHERE username = ? AND is_active = 1";
     $stmt = $conn->prepare($query);
     if (!$stmt) return null;

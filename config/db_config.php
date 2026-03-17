@@ -72,29 +72,38 @@ $candidateDbNames = array_values(array_unique(array_filter([
     'glo_ced_india'
 ])));
 
-$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, null, $dbPort);
-if ($conn->connect_error) {
-    error_log('Database host/user connection failed: ' . $conn->connect_error);
-    http_response_code(500);
-    die('Database connection error. Please contact administrator.');
-}
+$conn = null;
+$GLOBALS['DB_CONNECTION_ERROR'] = '';
 
-$selectedDbName = null;
-foreach ($candidateDbNames as $candidateDb) {
-    if (@$conn->select_db($candidateDb)) {
-        $selectedDbName = $candidateDb;
-        break;
+if (!class_exists('mysqli')) {
+    $GLOBALS['DB_CONNECTION_ERROR'] = 'MySQLi extension is not enabled on this server.';
+    error_log($GLOBALS['DB_CONNECTION_ERROR']);
+} else {
+    $conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, null, $dbPort);
+    if ($conn->connect_error) {
+        $GLOBALS['DB_CONNECTION_ERROR'] = 'Database host/user connection failed: ' . $conn->connect_error;
+        error_log($GLOBALS['DB_CONNECTION_ERROR']);
+        $conn = null;
     }
 }
 
-if ($selectedDbName === null) {
-    error_log('Database select failed for candidates: ' . implode(', ', $candidateDbNames));
-    http_response_code(500);
-    die('Database setup error. Please contact administrator.');
+$selectedDbName = null;
+if ($conn instanceof mysqli) {
+    foreach ($candidateDbNames as $candidateDb) {
+        if (@$conn->select_db($candidateDb)) {
+            $selectedDbName = $candidateDb;
+            break;
+        }
+    }
+}
+
+if ($conn instanceof mysqli && $selectedDbName === null) {
+    $GLOBALS['DB_CONNECTION_ERROR'] = 'Database select failed for candidates: ' . implode(', ', $candidateDbNames);
+    error_log($GLOBALS['DB_CONNECTION_ERROR']);
 }
 
 // Keep DB_NAME in sync with the selected database for pages that display it.
-if ($selectedDbName !== DB_NAME) {
+if ($selectedDbName !== null && $selectedDbName !== DB_NAME) {
     if (defined('DB_NAME')) {
         // Cannot redefine constants; expose selected name via global for internal use if needed.
         $GLOBALS['ACTIVE_DB_NAME'] = $selectedDbName;
@@ -102,7 +111,9 @@ if ($selectedDbName !== DB_NAME) {
 }
 
 // Set charset to UTF-8
-$conn->set_charset('utf8');
+if ($conn instanceof mysqli) {
+    $conn->set_charset('utf8');
+}
 
 // ============================================
 // SECURITY FUNCTIONS
@@ -179,6 +190,9 @@ function validate_required($field) {
  * @return string Escaped string
  */
 function escape_string($conn, $string) {
+    if (!($conn instanceof mysqli)) {
+        return '';
+    }
     return $conn->real_escape_string($string);
 }
 
@@ -191,6 +205,9 @@ function escape_string($conn, $string) {
  * @return mysqli_stmt|false The prepared statement or false on error
  */
 function prepare_query($conn, $query, $params = []) {
+    if (!($conn instanceof mysqli)) {
+        return false;
+    }
     $stmt = $conn->prepare($query);
     
     if ($stmt === false) {

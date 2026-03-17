@@ -16,13 +16,17 @@ require_once 'admin_users.php';
 
 $script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
 $script_dir = rtrim($script_dir, '/');
-$asset_base_url = ($script_dir === '' ? '' : $script_dir) . '/client/public';
+$root_dir = preg_replace('#/(client/src/admin|admin)$#', '', $script_dir);
+$asset_base_url = ($root_dir === '' ? '' : $root_dir) . '/client/public';
 
 // Check if database table exists
-$table_exists = true;
-$check_table = $conn->query("SHOW TABLES LIKE 'admins'");
-if (!$check_table || $check_table->num_rows == 0) {
-    $table_exists = false;
+$table_exists = false;
+if ($conn instanceof mysqli) {
+    $check_table = $conn->query("SHOW TABLES LIKE 'admins'");
+    $table_exists = $check_table && $check_table->num_rows > 0;
+}
+if (!$table_exists && !isset($login_error) && !empty($GLOBALS['DB_CONNECTION_ERROR'])) {
+    $login_error = 'Database connection failed. Please check server DB credentials.';
 }
 
 // Check if user submitted login form
@@ -145,7 +149,9 @@ if (isset($_SESSION['admin_logged_in'])) {
                         <p><span class="font-semibold text-gray-700">Server:</span> <span class="text-gray-600"><?php echo $_SERVER['SERVER_SOFTWARE']; ?></span></p>
                         <?php
                         // Check database connection
-                        $db_status = $conn->ping() ? '<span class="text-green-600"><i class="fas fa-check"></i> Connected</span>' : '<span class="text-red-600"><i class="fas fa-times"></i> Disconnected</span>';
+                        $db_status = ($conn instanceof mysqli && $conn->ping())
+                            ? '<span class="text-green-600"><i class="fas fa-check"></i> Connected</span>'
+                            : '<span class="text-red-600"><i class="fas fa-times"></i> Disconnected</span>';
                         echo '<p><span class="font-semibold text-gray-700">Database:</span> ' . $db_status . '</p>';
                         ?>
                     </div>

@@ -11,7 +11,8 @@ require_once 'admin_users.php';
 
 $script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
 $script_dir = rtrim($script_dir, '/');
-$asset_base_url = ($script_dir === '' ? '' : $script_dir) . '/client/public';
+$root_dir = preg_replace('#/(client/src/admin|admin)$#', '', $script_dir);
+$asset_base_url = ($root_dir === '' ? '' : $root_dir) . '/client/public';
 
 // Check authentication - redirect to login if not authenticated
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
