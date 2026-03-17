@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
         if ($entered_user !== '' && verify_admin($entered_user, $entered_password)) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_user'] = $entered_user;
-            header('Location: admin_submissions.php');
+            header('Location: /admin/submissions');
             exit;
         } else {
             $login_error = 'Invalid username or password. Please try again.';
@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
 // Check logout
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: index.php');
+    header('Location: /admin');
     exit;
 }
 
@@ -83,7 +83,7 @@ if (isset($_SESSION['admin_logged_in'])) {
                 </div>
                 <div class="flex items-center gap-6">
                     <span class="text-blue-100">Welcome, <strong><?php echo htmlspecialchars($_SESSION['admin_user']); ?></strong></span>
-                    <a href="index.php?logout=1" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition">
+                    <a href="/admin?logout=1" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition">
                         <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </a>
                 </div>
@@ -112,7 +112,7 @@ if (isset($_SESSION['admin_logged_in'])) {
                             <i class="fas fa-envelope"></i>
                         </div>
                     </div>
-                    <a href="admin_submissions.php" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition">
+                    <a href="/admin/submissions" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition">
                         <i class="fas fa-arrow-right mr-2"></i>View Submissions
                     </a>
                 </div>
@@ -128,7 +128,7 @@ if (isset($_SESSION['admin_logged_in'])) {
                             <i class="fas fa-users"></i>
                         </div>
                     </div>
-                    <a href="admin_manage_users.php" class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition">
+                    <a href="/admin/users" class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition">
                         <i class="fas fa-arrow-right mr-2"></i>Manage Users
                     </a>
                 </div>
@@ -248,7 +248,7 @@ if (isset($_SESSION['admin_logged_in'])) {
         <footer class="bg-gray-900 text-gray-400 mt-16 py-8 border-t">
             <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
                 <p>&copy; 2026 Glo-CED India. All rights reserved.</p>
-                <a href="index.php?logout=1" class="text-gray-300 hover:text-white">Logout</a>
+                <a href="/admin?logout=1" class="text-gray-300 hover:text-white">Logout</a>
             </div>
         </footer>
 

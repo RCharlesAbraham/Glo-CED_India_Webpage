@@ -16,7 +16,7 @@ $asset_base_url = ($root_dir === '' ? '' : $root_dir) . '/client/public';
 
 // Check authentication - redirect to login if not authenticated
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: index.php');
+    header('Location: /admin');
     exit;
 }
 
@@ -154,13 +154,13 @@ $conn->close();
                     <span class="hidden sm:inline-block text-blue-300 text-sm">| Admin Panel</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="admin_submissions.php" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin/submissions" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline">Submissions</span>
                     </a>
-                    <a href="index.php" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-home"></i> <span class="hidden sm:inline">Dashboard</span>
                     </a>
-                    <a href="index.php?logout=1" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin?logout=1" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Logout</span>
                     </a>
                 </div>

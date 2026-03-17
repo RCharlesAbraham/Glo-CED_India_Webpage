@@ -35,11 +35,7 @@ if (!$submission) {
 
 ?>
 
-<form method="POST" action="admin_submissions.php">
-
-?>
-
-<form method="POST" action="admin_submissions.php" class="space-y-5">
+<form method="POST" action="/admin/submissions" class="space-y-5">
     <input type="hidden" name="submission_id" value="<?php echo $submission['id']; ?>">
     
     <!-- Contact Info Grid -->

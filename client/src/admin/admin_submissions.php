@@ -20,7 +20,7 @@ $asset_base_url = ($root_dir === '' ? '' : $root_dir) . '/client/public';
 
 // Check authentication - redirect to login if not authenticated
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: index.php');
+    header('Location: /admin');
     exit;
 }
  
@@ -34,7 +34,7 @@ if (isset($_GET['delete_id'])) {
         $stmt->close();
         $_SESSION['message'] = 'Submission deleted successfully.';
     }
-    header('Location: admin_submissions.php');
+    header('Location: /admin/submissions');
     exit;
 }
 
@@ -51,7 +51,7 @@ if (isset($_POST['update_status'])) {
         $stmt->close();
         $_SESSION['message'] = 'Submission updated successfully.';
     }
-    header('Location: admin_submissions.php');
+    header('Location: /admin/submissions');
     exit;
 }
 
@@ -125,18 +125,18 @@ while ($row = $stats_result->fetch_assoc()) {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-4">
-                    <a href="index.php" class="text-white font-bold text-xl hover:text-blue-200 transition"><i class="fas fa-lock-open mr-2"></i>Glo-CED Admin</a>
+                    <a href="/admin" class="text-white font-bold text-xl hover:text-blue-200 transition"><i class="fas fa-lock-open mr-2"></i>Glo-CED Admin</a>
                     <span class="hidden sm:inline-block text-blue-300 text-sm">| Submissions</span>
                 </div>
                 <div class="flex items-center gap-2 sm:gap-3">
                     <span class="hidden md:inline text-blue-200 text-sm">Welcome, <?php echo htmlspecialchars($_SESSION['admin_user'] ?? 'Admin'); ?></span>
-                    <a href="index.php" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-home"></i> <span class="hidden sm:inline">Dashboard</span>
                     </a>
-                    <a href="admin_manage_users.php" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin/users" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-users-cog"></i> <span class="hidden sm:inline">Users</span>
                     </a>
-                    <a href="index.php?logout=1" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
+                    <a href="/admin?logout=1" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition">
                         <i class="fas fa-sign-out-alt"></i> <span class="hidden sm:inline">Logout</span>
                     </a>
                 </div>
@@ -214,7 +214,7 @@ while ($row = $stats_result->fetch_assoc()) {
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <h3 class="font-semibold text-gray-700"><i class="fas fa-filter mr-2 text-gray-400"></i>Filter by Status</h3>
                 <div class="flex flex-wrap gap-2">
-                    <a href="admin_submissions.php" class="px-4 py-2 text-sm font-medium rounded-lg transition <?php echo (!$status_filter) ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'; ?>">All</a>
+                    <a href="/admin/submissions" class="px-4 py-2 text-sm font-medium rounded-lg transition <?php echo (!$status_filter) ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'; ?>">All</a>
                     <a href="?status=new" class="px-4 py-2 text-sm font-medium rounded-lg transition <?php echo ($status_filter === 'new') ? 'bg-amber-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'; ?>">New</a>
                     <a href="?status=read" class="px-4 py-2 text-sm font-medium rounded-lg transition <?php echo ($status_filter === 'read') ? 'bg-sky-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'; ?>">Read</a>
                     <a href="?status=replied" class="px-4 py-2 text-sm font-medium rounded-lg transition <?php echo ($status_filter === 'replied') ? 'bg-green-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'; ?>">Replied</a>
@@ -347,7 +347,7 @@ while ($row = $stats_result->fetch_assoc()) {
             $('#modalBody').html('<div class="flex items-center justify-center py-12"><i class="fas fa-spinner fa-spin text-blue-500 text-2xl"></i></div>');
             $('#submissionModal').addClass('show');
             $.ajax({
-                url: 'admin_get_submission.php',
+                url: '/admin/get-submission',
                 type: 'GET',
                 data: { id: submissionId },
                 success: function(response) {
