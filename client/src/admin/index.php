@@ -14,6 +14,10 @@ session_start();
 require_once __DIR__ . '/../../../config/db_config.php';
 require_once 'admin_users.php';
 
+$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+$script_dir = rtrim($script_dir, '/');
+$asset_base_url = ($script_dir === '' ? '' : $script_dir) . '/client/public';
+
 // Check if database table exists
 $table_exists = true;
 $check_table = $conn->query("SHOW TABLES LIKE 'admins'");
@@ -55,8 +59,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Dashboard | Glo-CED India</title>
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/vendor/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo htmlspecialchars($asset_base_url); ?>/css/tailwind.css">
+        <link rel="stylesheet" href="<?php echo htmlspecialchars($asset_base_url); ?>/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { font-family: 'Inter', sans-serif; }
@@ -255,8 +259,8 @@ if (isset($_SESSION['admin_logged_in'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Login | Glo-CED India</title>
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/css/tailwind.css">
-        <link rel="stylesheet" href="/Glo-CED_India_Webpage/client/public/vendor/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo htmlspecialchars($asset_base_url); ?>/css/tailwind.css">
+        <link rel="stylesheet" href="<?php echo htmlspecialchars($asset_base_url); ?>/vendor/fontawesome/css/all.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
             body { 
@@ -276,7 +280,7 @@ if (isset($_SESSION['admin_logged_in'])) {
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-8 items-center">
                 <!-- Left: Login Card (text aligned left) -->
                 <div class="bg-white rounded-2xl shadow-2xl p-8">
-                    <img src="/Glo-CED_India_Webpage/client/public/img/logo.png" alt="Glo-CED India Logo" class="w-24 mb-6 mx-auto block" >
+                    <img src="<?php echo htmlspecialchars($asset_base_url); ?>/img/logo.png" alt="Glo-CED India Logo" class="w-24 mb-6 mx-auto block" >
                     <!-- Header -->
                     <div class="mb-8">
                         <h1 class="text-3xl font-bold text-gray-900 text-center">Admin Panel</h1>
