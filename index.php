@@ -34,39 +34,61 @@ if (preg_match('#^admin(/.*)?$#i', $requestUri, $m)) {
         'auth_status.php' => '../pages/auth_status.php',
     ];
     
-    $adminDirCandidates = [
-        __DIR__ . '/client/src/admin/',
-        __DIR__ . '/admin/',
+    $adminBaseCandidates = [
+        __DIR__ . '/client/src/admin',
+        __DIR__ . '/admin',
+        dirname(__DIR__) . '/client/src/admin',
+        dirname(__DIR__) . '/admin',
     ];
 
-    $adminDir = null;
-    foreach ($adminDirCandidates as $candidateDir) {
-        if (is_dir($candidateDir)) {
-            $adminDir = $candidateDir;
+    $pageBaseCandidates = [
+        __DIR__ . '/client/src/pages',
+        __DIR__ . '/pages',
+        dirname(__DIR__) . '/client/src/pages',
+        dirname(__DIR__) . '/pages',
+    ];
+
+    $docRoot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/');
+    if ($docRoot !== '') {
+        $adminBaseCandidates[] = $docRoot . '/client/src/admin';
+        $adminBaseCandidates[] = $docRoot . '/admin';
+        $pageBaseCandidates[] = $docRoot . '/client/src/pages';
+        $pageBaseCandidates[] = $docRoot . '/pages';
+    }
+
+    $adminBaseCandidates = array_values(array_unique($adminBaseCandidates));
+    $pageBaseCandidates = array_values(array_unique($pageBaseCandidates));
+
+    $fileCandidates = [];
+    if (isset($adminRoutes[$adminSub])) {
+        $mapped = $adminRoutes[$adminSub];
+        if ($mapped === '../pages/auth_status.php') {
+            foreach ($pageBaseCandidates as $base) {
+                $fileCandidates[] = $base . '/auth_status.php';
+            }
+        } else {
+            foreach ($adminBaseCandidates as $base) {
+                $fileCandidates[] = $base . '/' . $mapped;
+            }
+        }
+    } else {
+        foreach ($adminBaseCandidates as $base) {
+            // Try admin_<name>.php then <name>.php then raw path
+            $fileCandidates[] = $base . '/admin_' . $adminSub . '.php';
+            $fileCandidates[] = $base . '/' . $adminSub . '.php';
+            $fileCandidates[] = $base . '/' . $adminSub;
+        }
+    }
+
+    $file = null;
+    foreach ($fileCandidates as $candidate) {
+        if (file_exists($candidate) && is_file($candidate)) {
+            $file = $candidate;
             break;
         }
     }
-
-    if ($adminDir === null) {
-        http_response_code(500);
-        echo '<!DOCTYPE html><html><body><h1>500 - Admin directory not found</h1></body></html>';
-        exit;
-    }
     
-    if (isset($adminRoutes[$adminSub])) {
-        $file = $adminDir . $adminRoutes[$adminSub];
-    } else {
-        // Try admin_<name>.php then <name>.php
-        $file = $adminDir . 'admin_' . $adminSub . '.php';
-        if (!file_exists($file)) {
-            $file = $adminDir . $adminSub . '.php';
-        }
-        if (!file_exists($file)) {
-            $file = $adminDir . $adminSub;
-        }
-    }
-    
-    if (file_exists($file)) {
+    if ($file && file_exists($file)) {
         chdir(dirname($file));
         ob_start();
         include $file;

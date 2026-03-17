@@ -43,11 +43,22 @@ function env_value($key, $default = '') {
     return $default;
 }
 
-// Database connection parameters (ENV first, then safe defaults)
-$dbHost = env_value('DB_HOST', 'localhost');
-$dbUser = env_value('DB_USER', 'root');
-$dbPass = env_value('DB_PASS', env_value('DB_PASSWORD', ''));
-$dbName = env_value('DB_NAME', 'charity_trust');
+function env_first(array $keys, $default = '') {
+    foreach ($keys as $key) {
+        $value = env_value($key, '');
+        if ($value !== '') {
+            return $value;
+        }
+    }
+    return $default;
+}
+
+// Database connection parameters (ENV first, then hosting defaults)
+$dbHost = trim(env_first(['DB_HOST', 'MYSQL_HOST'], '127.0.0.1'));
+$dbUser = trim(env_first(['DB_USER', 'DB_USERNAME', 'MYSQL_USER'], 'glodblive'));
+$dbPass = env_first(['DB_PASS', 'DB_PASSWORD', 'MYSQL_PASSWORD', 'MYSQL_PASS'], 'Q34kE8xTU0wVrbD6J9Mt');
+$dbName = trim(env_first(['DB_NAME', 'DB_DATABASE', 'MYSQL_DATABASE'], 'glodblive'));
+$dbPort = (int) env_first(['DB_PORT', 'MYSQL_PORT'], '3306');
 
 if (!defined('DB_HOST')) define('DB_HOST', $dbHost);
 if (!defined('DB_USER')) define('DB_USER', $dbUser);
@@ -61,7 +72,7 @@ $candidateDbNames = array_values(array_unique(array_filter([
     'glo_ced_india'
 ])));
 
-$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS);
+$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS, null, $dbPort);
 if ($conn->connect_error) {
     error_log('Database host/user connection failed: ' . $conn->connect_error);
     http_response_code(500);
