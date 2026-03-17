@@ -341,7 +341,7 @@ while ($row = $stats_result->fetch_assoc()) {
         </div>
     </div>
 
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         function openModal(submissionId) {
             $('#modalBody').html('<div class="flex items-center justify-center py-12"><i class="fas fa-spinner fa-spin text-blue-500 text-2xl"></i></div>');
