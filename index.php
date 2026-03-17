@@ -34,7 +34,24 @@ if (preg_match('#^admin(/.*)?$#i', $requestUri, $m)) {
         'auth_status.php' => '../pages/auth_status.php',
     ];
     
-    $adminDir = __DIR__ . '/client/src/admin/';
+    $adminDirCandidates = [
+        __DIR__ . '/client/src/admin/',
+        __DIR__ . '/admin/',
+    ];
+
+    $adminDir = null;
+    foreach ($adminDirCandidates as $candidateDir) {
+        if (is_dir($candidateDir)) {
+            $adminDir = $candidateDir;
+            break;
+        }
+    }
+
+    if ($adminDir === null) {
+        http_response_code(500);
+        echo '<!DOCTYPE html><html><body><h1>500 - Admin directory not found</h1></body></html>';
+        exit;
+    }
     
     if (isset($adminRoutes[$adminSub])) {
         $file = $adminDir . $adminRoutes[$adminSub];

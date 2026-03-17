@@ -10,22 +10,88 @@
 // DATABASE CONFIGURATION
 // ============================================
 
-// Database connection parameters
-define('DB_HOST', 'localhost');      // Your database host
-define('DB_USER', 'root');           // Your database username
-define('DB_PASS', '');               // Your database password
-define('DB_NAME', 'charity_trust');  // Your database name
+// Try to load .env from project root if present.
+$envFile = dirname(__DIR__) . '/.env';
+if (file_exists($envFile) && is_readable($envFile)) {
+    $envLines = @file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (is_array($envLines)) {
+        foreach ($envLines as $line) {
+            $line = trim($line);
+            if ($line === '' || strpos($line, '#') === 0 || strpos($line, '=') === false) {
+                continue;
+            }
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value, " \t\n\r\0\x0B\"'");
+            if ($key !== '' && getenv($key) === false) {
+                putenv($key . '=' . $value);
+                $_ENV[$key] = $value;
+            }
+        }
+    }
+}
 
-// Create connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+// Load an environment value with fallback support.
+function env_value($key, $default = '') {
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+        return $_ENV[$key];
+    }
+    $value = getenv($key);
+    if ($value !== false && $value !== '') {
+        return $value;
+    }
+    return $default;
+}
 
-// Check connection
+// Database connection parameters (ENV first, then safe defaults)
+$dbHost = env_value('DB_HOST', 'localhost');
+$dbUser = env_value('DB_USER', 'root');
+$dbPass = env_value('DB_PASS', env_value('DB_PASSWORD', ''));
+$dbName = env_value('DB_NAME', 'charity_trust');
+
+if (!defined('DB_HOST')) define('DB_HOST', $dbHost);
+if (!defined('DB_USER')) define('DB_USER', $dbUser);
+if (!defined('DB_PASS')) define('DB_PASS', $dbPass);
+if (!defined('DB_NAME')) define('DB_NAME', $dbName);
+
+// Try preferred DB name first, then common fallback names used in this project.
+$candidateDbNames = array_values(array_unique(array_filter([
+    DB_NAME,
+    'charity_trust',
+    'glo_ced_india'
+])));
+
+$conn = @new mysqli(DB_HOST, DB_USER, DB_PASS);
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    error_log('Database host/user connection failed: ' . $conn->connect_error);
+    http_response_code(500);
+    die('Database connection error. Please contact administrator.');
+}
+
+$selectedDbName = null;
+foreach ($candidateDbNames as $candidateDb) {
+    if (@$conn->select_db($candidateDb)) {
+        $selectedDbName = $candidateDb;
+        break;
+    }
+}
+
+if ($selectedDbName === null) {
+    error_log('Database select failed for candidates: ' . implode(', ', $candidateDbNames));
+    http_response_code(500);
+    die('Database setup error. Please contact administrator.');
+}
+
+// Keep DB_NAME in sync with the selected database for pages that display it.
+if ($selectedDbName !== DB_NAME) {
+    if (defined('DB_NAME')) {
+        // Cannot redefine constants; expose selected name via global for internal use if needed.
+        $GLOBALS['ACTIVE_DB_NAME'] = $selectedDbName;
+    }
 }
 
 // Set charset to UTF-8
-$conn->set_charset("utf8");
+$conn->set_charset('utf8');
 
 // ============================================
 // SECURITY FUNCTIONS

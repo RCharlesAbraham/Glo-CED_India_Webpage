@@ -54,25 +54,49 @@ error_reporting(E_ALL);
             </h2>
             <div class="space-y-3 text-sm">
                 <?php
+                $adminDir = is_dir(__DIR__ . '/client/src/admin')
+                    ? __DIR__ . '/client/src/admin'
+                    : __DIR__ . '/admin';
+
                 $files = [
-                    '../config/db_config.php' => 'Database Config',
-                    './index.php' => 'Admin Index',
-                    './admin_users.php' => 'Admin Users',
-                    'admin_submissions.php' => 'Admin Submissions',
-                    'admin_manage_users.php' => 'Manage Users',
+                    [
+                        'label' => 'Database Config',
+                        'path' => __DIR__ . '/config/db_config.php',
+                        'display' => 'config/db_config.php',
+                    ],
+                    [
+                        'label' => 'Admin Index',
+                        'path' => $adminDir . '/index.php',
+                        'display' => str_replace(__DIR__ . '/', '', $adminDir . '/index.php'),
+                    ],
+                    [
+                        'label' => 'Admin Users',
+                        'path' => $adminDir . '/admin_users.php',
+                        'display' => str_replace(__DIR__ . '/', '', $adminDir . '/admin_users.php'),
+                    ],
+                    [
+                        'label' => 'Admin Submissions',
+                        'path' => $adminDir . '/admin_submissions.php',
+                        'display' => str_replace(__DIR__ . '/', '', $adminDir . '/admin_submissions.php'),
+                    ],
+                    [
+                        'label' => 'Manage Users',
+                        'path' => $adminDir . '/admin_manage_users.php',
+                        'display' => str_replace(__DIR__ . '/', '', $adminDir . '/admin_manage_users.php'),
+                    ],
                 ];
                 
-                foreach ($files as $file => $label) {
-                    $full_path = __DIR__ . '/' . $file;
+                foreach ($files as $fileInfo) {
+                    $full_path = $fileInfo['path'];
                     $exists = file_exists($full_path);
                     $readable = $exists && is_readable($full_path);
                     $status = $readable ? 'text-green-600' : ($exists ? 'text-yellow-600' : 'text-red-600');
                     $icon = $readable ? 'fa-check-circle' : ($exists ? 'fa-exclamation-circle' : 'fa-times-circle');
                     
                     echo '<p><i class="fas ' . $icon . ' ' . $status . ' mr-2"></i>';
-                    echo '<strong>' . $label . ':</strong> ';
+                    echo '<strong>' . htmlspecialchars($fileInfo['label']) . ':</strong> ';
                     echo $readable ? '<span class="text-green-600">✓ OK</span>' : ($exists ? '<span class="text-yellow-600">⚠ Exists but not readable</span>' : '<span class="text-red-600">✗ Not found</span>');
-                    echo ' <code class="text-xs">' . htmlspecialchars($file) . '</code>';
+                    echo ' <code class="text-xs">' . htmlspecialchars($fileInfo['display']) . '</code>';
                     echo '</p>';
                 }
                 ?>
@@ -87,12 +111,17 @@ error_reporting(E_ALL);
             <div class="space-y-3 text-sm">
                 <?php
                 try {
-                    require_once '../config/db_config.php';
+                    $dbConfigPath = __DIR__ . '/config/db_config.php';
+                    if (!file_exists($dbConfigPath)) {
+                        throw new RuntimeException('Missing config file at ' . $dbConfigPath);
+                    }
+
+                    require_once $dbConfigPath;
                     
                     if ($conn->connect_error) {
                         echo '<p class="text-red-600"><i class="fas fa-times-circle mr-2"></i><strong>Error:</strong> ' . htmlspecialchars($conn->connect_error) . '</p>';
                     } else {
-                        $db_name = DB_NAME;
+                        $db_name = $GLOBALS['ACTIVE_DB_NAME'] ?? DB_NAME;
                         echo '<p class="text-green-600"><i class="fas fa-check-circle mr-2"></i>Connected to database <code>' . htmlspecialchars($db_name) . '</code></p>';
                         
                         // Check tables
@@ -135,20 +164,20 @@ error_reporting(E_ALL);
             </h2>
             <ol class="space-y-2 text-sm text-blue-900 list-decimal list-inside">
                 <li>Check the diagnostic information above</li>
-                <li>If tables are missing, <a href="../admin_setup.php" class="text-blue-600 font-semibold hover:underline">run the Setup Tool</a></li>
+                <li>If tables are missing, <a href="admin_setup.php" class="text-blue-600 font-semibold hover:underline">run the Setup Tool</a></li>
                 <li>If admin users are missing, create one in the Setup Tool</li>
-                <li>Then try to <a href="index.php" class="text-blue-600 font-semibold hover:underline">access the admin panel</a></li>
+                <li>Then try to <a href="admin" class="text-blue-600 font-semibold hover:underline">access the admin panel</a></li>
             </ol>
         </div>
 
         <!-- Help Links -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a href="index.php" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition text-center">
+            <a href="admin" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition text-center">
                 <i class="fas fa-lock text-2xl text-blue-600 mb-2"></i>
                 <h3 class="font-semibold text-gray-900">Admin Login</h3>
                 <p class="text-xs text-gray-600 mt-1">Try logging in</p>
             </a>
-            <a href="../admin_setup.php" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition text-center">
+            <a href="admin_setup.php" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition text-center">
                 <i class="fas fa-tools text-2xl text-green-600 mb-2"></i>
                 <h3 class="font-semibold text-gray-900">Setup Tool</h3>
                 <p class="text-xs text-gray-600 mt-1">Configure database</p>
